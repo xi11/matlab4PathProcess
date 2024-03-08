@@ -4,7 +4,7 @@ clc;
 close all
 %final
 src_path = '/Volumes/xpan7/project/tcga_tnbc/tmesegproDiv12_tcgaOnly/mask_ss1';
-dst_path = '/Volumes/xpan7/project/tcga_tnbc/tmesegproDiv12_tcgaOnly/mask_ss1_post_tumor15_10000';
+dst_path = '/Volumes/xpan7/project/tcga_tnbc/tmesegproDiv12_tcgaOnly/mask_ss1_post_10000';
 
 
 if ~exist(dst_path, 'dir')
@@ -26,9 +26,9 @@ mask_tumor = zeros(m, n);
 %mask_tumor(mask_tme(:,:,1)==255 & mask_tme(:,:,2)==0 &mask_tme(:,:,3)==255) = 255;
         
         mask_tumor = imfill(mask_tumor, 'holes');
-        se1 = strel('disk', 15);  %to set
-        mask_tumor = imclose(mask_tumor, se1);
-        mask_tumor = imfill(mask_tumor, 'holes');
+        %se1 = strel('disk',5);  %to set
+        %mask_tumor = imclose(mask_tumor, se1);
+        %mask_tumor = imfill(mask_tumor, 'holes');
         
         cc = bwconncomp(mask_tumor);
         stats = regionprops(cc,'Area');

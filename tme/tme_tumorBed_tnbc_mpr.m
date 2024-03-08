@@ -1,10 +1,9 @@
-
 clear;
 clc;
 close all
 %final
-src_path = '/Volumes/xpan7/project/tcga_tnbc/tmesegproDiv12_tcgaOnly/mask_ss1';
-dst_path = '/Volumes/xpan7/project/tcga_tnbc/tmesegproDiv12_tcgaOnly/mask_ss1_post_tumor15_10000';
+src_path = '/Volumes/yuan_lab/TIER2/mpr_frank/mpr2582/tmesegproDiv12/mask_ss1';
+dst_path = '/Volumes/yuan_lab/TIER2/mpr_frank/mpr2582/tmesegproDiv12/mask_ss1_post_tumor15_10000';
 
 
 if ~exist(dst_path, 'dir')
@@ -39,5 +38,3 @@ mask_tumor = zeros(m, n);
         imwrite(mask_final, fullfile(dst_path, [file_name, '_tme_tumorBed.png']))
     end
 end
-
-

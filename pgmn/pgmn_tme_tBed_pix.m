@@ -3,7 +3,7 @@ clc
 close all
 
 
-src_gp_mask = '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/tmeseg_artemisTCGA_finetune20xPen_K8div12v2/mask_ss1_post_tumor15_900';
+src_gp_mask = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/tmesegproTcgaDiv12/mask_ss1_tbed';
 
 files = dir(fullfile(src_gp_mask, '*.png'));
 
@@ -13,7 +13,7 @@ k = length(files);
 gp_pix = zeros(k, 7);
 for i = 1:k
     file_name = files(i).name;
-    wsi_ID = extractBefore(file_name, '_Ss1.png');
+    wsi_ID = extractBefore(file_name, '.svs_tumorBed_tme.png');
    
     img = double(imread(fullfile(src_gp_mask, file_name)));
     temp = [];
@@ -48,7 +48,15 @@ for i = 1:k
     tableTmp.blood_pix(i) = gp_pix(i, 7);
  
 
-
+%     tableTmp.tumor_per(i) = gp_pix(i, 3);
+%     tableTmp.necrosis_per(i) = gp_pix(i, 2);
+%     tableTmp.inflam_per(i) = gp_pix(i, 5);
+%     tableTmp.reactive_per(i) = gp_pix(i, 4);
+%     tableTmp.inactive_per(i) = gp_pix(i, 1);
+%     tableTmp.reactive2stroma(i) = gp_pix(i, 6);
+%     tableTmp.reactive2tumor(i) = gp_pix(i, 7);
+%     tableTmp.inactive2tumor(i) = gp_pix(i, 8);
 %           
 end
-writetable(tableTmp, '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/tmeseg_artemisTCGA_finetune20xPen_K8div12v2/discovery_post_tme_pix.xlsx')
+
+writetable(tableTmp, '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/tmesegproTcgaDiv12/tmeTcgaDiv12_tbed_x8.xlsx')

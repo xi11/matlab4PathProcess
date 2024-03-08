@@ -4,13 +4,13 @@ close all
 
 
 %src_gp_mask = 'D:\TCGA_BRCA_part\stroma\mask_ss1_update1_DCP20_21max_5_5_final';
-src_gp_mask = '/Volumes/xpan7/project/tcga_tnbc/tmeseg_tcga20x384finetune/mask_ss1_post_tumor21_90000';
+src_gp_mask = '/Volumes/xpan7/project/tcga_tnbc/tmesegproDiv12_tcgaOnly/mask_ss1_post_tumor5_10000';
 files = dir(fullfile(src_gp_mask, '*.png'));
 
-tableTmp = table("",0,0,0,0,0,'VariableNames',{'ID',...
-    'tumor_pix', 'necrosis_pix', 'stroma_pix', 'fat_pix', 'inflam_pix'});
+tableTmp = table("",0,0,0,0,0,0,0,'VariableNames',{'ID',...
+    'tumor_pix', 'necrosis_pix', 'stroma_pix', 'fat_pix', 'inflam_pix', 'parenchyma_pix', 'blood_pix'});
 k = length(files);
-gp_pix = zeros(k, 5);
+gp_pix = zeros(k, 7);
 for i = 1:k
     file_name = files(i).name;
     wsi_ID = extractBefore(file_name, '_Ss1.png');
@@ -24,14 +24,16 @@ for i = 1:k
     mask_digit((img(:,:,1)==128 & img(:,:,2)==0 & img(:,:,3)==0)) = 3; %tumor
     mask_digit((img(:,:,1)==255 & img(:,:,2)==255 & img(:,:,3)==0)) = 4; %stroma
     mask_digit((img(:,:,1)==128 & img(:,:,2)==128 & img(:,:,3)==0)) = 5; %fat
+    mask_digit((img(:,:,1)==0 & img(:,:,2)==255 & img(:,:,3)==255)) = 6; %parenchyma
+    mask_digit((img(:,:,1)==0 & img(:,:,2)==0 & img(:,:,3)==255)) = 7; %blood
+
     
-    
-    for j = 1:5
+    for j = 1:7
         temp(j) = length(find(mask_digit(:)==j));
     end
     if max(temp)>0
     
-    gp_pix(i, 1:5) = temp;  %per
+    gp_pix(i, 1:7) = temp;  %pix
    
     end
     
@@ -42,6 +44,8 @@ for i = 1:k
     tableTmp.stroma_pix(i) = gp_pix(i, 4);
     tableTmp.fat_pix(i) = gp_pix(i, 5);
     tableTmp.inflam_pix(i) = gp_pix(i, 1);
+    tableTmp.parenchyma_pix(i) = gp_pix(i, 6);
+    tableTmp.blood_pix(i) = gp_pix(i, 7);
  
 
 %     tableTmp.tumor_per(i) = gp_pix(i, 3);
@@ -54,6 +58,6 @@ for i = 1:k
 %     tableTmp.inactive2tumor(i) = gp_pix(i, 8);
 %           
 end
-writetable(tableTmp, '/Volumes/xpan7/project/tcga_tnbc/tmeseg_tcga20x384finetune/TCGA_BRCA118_tmeTCGAfine384_tumor21_90000_pixel.xlsx')
+writetable(tableTmp, '/Volumes/xpan7/project/tcga_tnbc/tmesegproDiv12_tcgaOnly/TCGA_BRCA118_tmeDiv12K8_tumor5_10000_pixel.xlsx')
 
 
