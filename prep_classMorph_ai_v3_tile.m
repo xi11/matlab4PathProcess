@@ -2,13 +2,13 @@ clc
 clear
 close all;
 %% class: raw classification; class2: refined classification
-data_folder = '/Volumes/yuan_lab/TIER2/st_lung/fullres/4_cell_class/csv_refine'; %annotations / cells
-seg_folder = '/Volumes/yuan_lab/TIER2/st_lung/fullres/3_cell_seg/mat'; %1054 in RDS, 947 in proj5, not sure how many is overlapped
-cws_folder = '/Volumes/yuan_lab/TIER2/st_lung/fullres/1_cws_tiling';
+data_folder = '/Volumes/yuan_lab/TIER2/share_tls-st/HE/til_json/4_cell_class_segformerBRCA/csv'; %annotations / cells
+seg_folder = '/Volumes/yuan_lab/TIER2/share_tls-st/HE/til_json/3_cell_seg/mat'; %1054 in RDS, 947 in proj5, not sure how many is overlapped
+cws_folder = '/Volumes/yuan_lab/TIER2/share_tls-st/HE/til_json/1_cws_tiling';
 files = dir(fullfile(seg_folder, '*.tiff'));
 
 %%
-save_folder = '/Volumes/yuan_lab/TIER2/st_lung/fullres/cellFeatures_v1_refine';
+save_folder = '/Volumes/yuan_lab/TIER2/share_tls-st/HE/til_json/cellFeatures_v3_refine';
 %save_filename = 'regional_tilesArea.csv';
 if ~exist(save_folder, 'dir')
     mkdir(save_folder);
@@ -64,7 +64,7 @@ for i = 1:length(files)
                     [xxk,dist] = dsearchn(P,PQ);
                     stats = stats(xxk,:);
                     
-                    class.Properties.VariableNames = {'class' 'class_x' 'class_y' 'class2'};
+                    class.Properties.VariableNames = {'class' 'x_tile' 'y_tile' 'class2'};
                     stats = [class stats];
                     
                     %average
@@ -121,7 +121,7 @@ for i = 1:length(files)
                         RGBStats = table(RGBMeanIntensity, RGBMinIntensity, RGBMaxIntensity); %taken out RGBWCx, RGBWCy,
                         
                         trait = [stats RGBStats];
-                        trait = string_to_table(trait, DaName, 'Da');  %Players.Role = repmat("Cricketer", size(Players.Name))
+                        trait = string_to_table(trait, DaName, 'tile');  %Players.Role = repmat("Cricketer", size(Players.Name))
                         trait = string_to_table(trait, sample, 'sample');
                         
                         writetable(trait, fullfile(save_folder,sample,[DaName '.csv']));

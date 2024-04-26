@@ -4,7 +4,7 @@ close all
 
 
 %src_gp_mask = 'D:\TCGA_BRCA_part\stroma\mask_ss1_update1_DCP20_21max_5_5_final';
-src_gp_mask = '/Volumes/xpan7/project/tcga_tnbc/tmesegproDiv12_tcgaOnly/mask_ss1_post_tumor5_10000';
+src_gp_mask = '/Volumes/xpan7-1/project/tcga_tnbc/mit-b3-finetuned-tmeTCGAbrca-e60-lr00001-s512-20x768/mask_ss1512_post_tumor21_90000';
 files = dir(fullfile(src_gp_mask, '*.png'));
 
 tableTmp = table("",0,0,0,0,0,0,0,'VariableNames',{'ID',...
@@ -58,6 +58,6 @@ for i = 1:k
 %     tableTmp.inactive2tumor(i) = gp_pix(i, 8);
 %           
 end
-writetable(tableTmp, '/Volumes/xpan7/project/tcga_tnbc/tmesegproDiv12_tcgaOnly/TCGA_BRCA118_tmeDiv12K8_tumor5_10000_pixel.xlsx')
+writetable(tableTmp, '/Volumes/xpan7-1/project/tcga_tnbc/mit-b3-finetuned-tmeTCGAbrca-e60-lr00001-s512-20x768/TCGA_BRCA118_segformer512_tumor21_90000_pixel.xlsx')
 
 

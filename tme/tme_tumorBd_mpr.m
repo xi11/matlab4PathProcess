@@ -2,9 +2,9 @@ clear;
 clc;
 close all
 %final
-src_path = '/Volumes/yuan_lab/TIER2/mpr_frank/mpr_pataer/til/1_cws_tiling';
-ref_path = '/Volumes/yuan_lab/TIER2/mpr_frank/mpr_pataer/tmesegproDiv12v2/mask_ss1';
-dst_path = '/Volumes/yuan_lab/TIER2/mpr_frank/mpr_pataer/tmesegproDiv12v2/mask_ss1_final';
+src_path = '/Volumes/yuan_lab/TIER2/mpr_frank/mpr2949/til/1_cws_tiling';
+ref_path = '/Volumes/yuan_lab/TIER2/mpr_frank/mpr2949/mit-b3-finetuned-tmeTCGAbrcaLUAD-e60-lr00001-s512-20x768-10x512rere/mask_ss1768';
+dst_path = '/Volumes/yuan_lab/TIER2/mpr_frank/mpr2949/mit-b3-finetuned-tmeTCGAbrcaLUAD-e60-lr00001-s512-20x768-10x512rere/mask_ss1768_final';
 
 
 if ~exist(dst_path, 'dir')

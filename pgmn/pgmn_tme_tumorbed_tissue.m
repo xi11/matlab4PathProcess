@@ -2,7 +2,7 @@
 clear;
 clc;
 close all
-%final
+%to combine tissue layer, tumor-bed layer, tme-tumor-bed layer, pgmn layer
 src_path = '/Volumes/yuan_lab/TIER2/anthracosis/prospect_pilot10/1_cws_tiling';
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/prospect_pilot10/tmesegproDiv12v2/mask_ss1';
 ref_path = '/Volumes/yuan_lab/TIER2/anthracosis/prospect_pilot10/pgmn_TMEsegDiv12sCE/mask_ss1_x8';

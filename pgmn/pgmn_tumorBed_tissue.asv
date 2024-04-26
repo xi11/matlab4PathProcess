@@ -2,18 +2,13 @@ clear;
 clc;
 close all
 %final
-src_path = '/Volumes/yuan_lab/public_data/TCGA_luad/til/1_cws_tiling';
-ref_path = '/Volumes/yuan_lab/public_data/TCGA_luad/pigment/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
-pgmn_refine = '/Volumes/yuan_lab/public_data/TCGA_luad/pigment/pgmn_TMEsegDiv12sCE/mask_ss1_x8_notTMEerode51';
-dst_path = '/Volumes/yuan_lab/public_data/TCGA_luad/pigment/ss1x8_tissueBed_entireDCP10close27remove90000_bedDCP20Open5remove90000_erode51';
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker_multi/1_cws_tiling';
+ref_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker_multi/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker_multi/ss1x8_tissueBed_entireDCP10close27remove90000_bedDCP20Open5remove90000';
 
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
-end
-
-if ~exist(pgmn_refine, 'dir')
-    mkdir(pgmn_refine)
 end
 
 files = dir(fullfile(src_path, '*.svs'));
@@ -44,11 +39,6 @@ for i =1:length(files)
         mask_tissue = bwareaopen(mask_post1, 90000);
         mask_tissue = imresize(mask_tissue, [m, n], 'nearest');
         
-        se3 = strel('disk',51);  %to set
-        mask_tissue  = imerode(mask_tissue , se3);
-        mask_pgmn_re = mask_pgmn .*uint8(mask_tissue);
-        imwrite(mask_pgmn_re, fullfile(pgmn_refine, [file_name, '_Ss1.png']))
-        
         %tumor bed
         mask_post2 = mask_minus;
         mask_post2(mask_minus>20)=255;
@@ -64,8 +54,6 @@ for i =1:length(files)
         idx = find([stats.Area] >= 90000);
         BW2 = ismember(labelmatrix(cc),idx);
         BW2 = imresize(BW2, [m, n], 'nearest');
-
-        
         
         mask_tissue1 = 128*uint8(mask_tissue);
         mask_tissue2 = 0*uint8(mask_tissue);

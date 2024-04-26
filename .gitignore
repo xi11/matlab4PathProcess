@@ -1,0 +1,12 @@
+# K8S-related
+logs/
+.log-runner.sh
+done
+
+# Mac-related
+.DS_Store
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
