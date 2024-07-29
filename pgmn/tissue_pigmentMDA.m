@@ -2,9 +2,9 @@ clear;
 clc;
 close all
 %final-
-src_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/1_cws_tiling';
-ref_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/tissue_ss1x8_entireDCP10close27remove90000';
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/1_cws_tiling';
+ref_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/tissue_ss1x8_entireDCP10close27remove90000';
 
 
 if ~exist(dst_path, 'dir')

@@ -3,8 +3,8 @@ clc
 close all
 
 
-pgmn_mask = '/Volumes/yuan_lab/public_data/TCGA_luad/pigment/pgmn_TMEsegDiv12sCE/mask_ss1_x8_notTMEerode51';
-tissue_mask = '/Volumes/yuan_lab/public_data/TCGA_luad/pigment/ss1x8_tissueBed_entireDCP10close27remove90000_bedDCP20Open5remove90000_erode51';
+pgmn_mask = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
+tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/ss1x8_tme_tissue21_90000_tumorBed5_DCP20_90000_segformerTCGA512';
 files = dir(fullfile(pgmn_mask, '*.png'));
 
 tableTmp = table("",0, 0, 0,0,'VariableNames',{'ID','pgmn_tbed', 'pgmn_norm', 'tumor_bed', 'tissue8'});
@@ -15,7 +15,7 @@ for i = 1:k
     wsi_ID = extractBefore(file_name, '.svs_Ss1.png');
     pgmn = imread(fullfile(pgmn_mask, file_name));
     pgmn = logical(pgmn(:,:,1));
-    tissue = imread(fullfile(tissue_mask, [wsi_ID, '.svs_tissue_tumorBed.png']));
+    tissue = imread(fullfile(tissue_mask, [wsi_ID, '.svs_tme_tumorBed.png']));
     tumor_bed = tissue(:,:,1);
     tissue_area = length(find(tumor_bed(:) >0));
     tumor_bed_area = length(find(tumor_bed(:) == 255));
@@ -37,4 +37,4 @@ for i = 1:k
     tableTmp.tissue8(i) = gp_pix(i, 4);
         
 end
-writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_TMEsegFOplaindiv12sCE/tcga-luad_pgmn_tumorBed_imageProcess_erode51.xlsx')
+writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_TMEsegFOplaindiv12sCE/pix_pgmn/TMA5_pgmn_tumorBed_TME.xlsx')

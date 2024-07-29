@@ -3,7 +3,7 @@ clc
 close all
 
 
-src_gp_mask = '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/tmeseg_artemisTCGA_finetune20xPen_K8div12v2/mask_ss1_post_tumor15_900';
+src_gp_mask = '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetuned-tmeTCGA-60-lr00001-s512-20x768/mask_ss1512_post_tumor15_900';
 
 files = dir(fullfile(src_gp_mask, '*.png'));
 
@@ -51,4 +51,4 @@ for i = 1:k
 
 %           
 end
-writetable(tableTmp, '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/tmeseg_artemisTCGA_finetune20xPen_K8div12v2/discovery_post_tme_pix.xlsx')
+writetable(tableTmp, '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetuned-tmeTCGA-60-lr00001-s512-20x768/discovery_post_tme_pix.xlsx')

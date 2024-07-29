@@ -3,9 +3,9 @@ clc;
 close all
 %final - tumorbed (red) and tissue (purple) generated with image
 %processing, anthracosis are mapped onto the tumorbed/tissue
-src_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/1_cws_tiling';
-ref_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/ss1x8_pgmn_tissueBed_entireDCP10close27remove90000_bedDCP20Open5remove90000';
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/1_cws_tiling';
+ref_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8_tissueBed_entireDCP10close27remove90000_bedDCP20Open5remove90000';
 
 
 if ~exist(dst_path, 'dir')
@@ -66,9 +66,9 @@ for i =1:length(files)
         mask_tissue3(BW2) = 0;
         mask_final = cat(3,mask_tissue1, mask_tissue2, mask_tissue3);
        
-        mask_pgmn = mask_pgmn(:,:,1);
-        mask_pgmn = logical(mask_pgmn).*mask_tissue;
-        mask_final(repmat(logical(mask_pgmn), [1, 1, 3])) = 255;
+        %mask_pgmn = mask_pgmn(:,:,1);
+        %mask_pgmn = logical(mask_pgmn).*mask_tissue;
+        %mask_final(repmat(logical(mask_pgmn), [1, 1, 3])) = 255;
         
         imwrite(mask_final, fullfile(dst_path, [file_name, '_tissue_tumorBed.png']))
     end

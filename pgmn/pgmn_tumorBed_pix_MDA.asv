@@ -3,8 +3,8 @@ clc
 close all
 
 
-pgmn_mask = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker_multi/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
-tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker_multi/ss1x8_pgmn_tissue21_90000_tumorBed5_DCP20_90000_segformerTCGA';
+pgmn_mask = '/Volumes/yuan_lab/TIER2/anthracosis/prospect_multi_rescan/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
+tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/ss1x8_tme_tissue21_90000_tumorBed5_DCP20_90000_segformerTCGA512';
 files = dir(fullfile(pgmn_mask, '*.png'));
 
 tableTmp = table("",0, 0, 0,0,'VariableNames',{'ID','pgmn_tbed', 'pgmn_norm', 'tumor_bed', 'tissue8'});
@@ -34,7 +34,7 @@ for i = 1:k
     tableTmp.pgmn_tbed(i) = gp_pix(i, 2);
     tableTmp.pgmn_norm(i) = gp_pix(i, 3);
     tableTmp.tumor_bed(i) = gp_pix(i, 1);
-    tableTmp.tissue(i) = gp_pix(i, 4);
+    tableTmp.tissue8(i) = gp_pix(i, 4);
         
 end
-writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_TMEsegFOplaindiv12sCE/NS-multi_pgmn_tumorBed_segformer.xlsx')
+writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_TMEsegFOplaindiv12sCE/pix_pgmn/prospect_multi_rescan_pgmn_tumorBed_TME.xlsx')

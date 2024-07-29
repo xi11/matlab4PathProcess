@@ -1,7 +1,7 @@
 clear;
 clc;
 close all
-%final
+%final, image processing to filter out pgmn outside tissue
 src_path = '/Volumes/yuan_lab/public_data/TCGA_luad/til/1_cws_tiling';
 ref_path = '/Volumes/yuan_lab/public_data/TCGA_luad/pigment/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
 pgmn_refine = '/Volumes/yuan_lab/public_data/TCGA_luad/pigment/pgmn_TMEsegDiv12sCE/mask_ss1_x8_notTMEerode51';

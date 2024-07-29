@@ -7,11 +7,11 @@ close all
 %not sure for prospect-pilot tumor-bed, it's DCP30, while DCP20 for
 %never-smoker pilot, it's DCP20. W/ or w/o pgmn is for whether overlaying
 %pgmn on the tumor-bed or tissue
-src_path = '/Volumes/yuan_lab/public_data/TCGA_luad/til/1_cws_tiling';
-tme_path = '/Volumes/yuan_lab/public_data/TCGA_luad/tme/mit-b3-finetuned-tmeTCGAbrcaLUAD-e60-lr00001-s512-20x768-10x512rere/mask_ss1768';
-ref_path = '/Volumes/yuan_lab/public_data/TCGA_luad/pigment/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
-pgmn_refine = '/Volumes/yuan_lab/public_data/TCGA_luad/pigment/pgmn_TMEsegDiv12sCE/mask_ss1_x8_erode21';
-dst_path = '/Volumes/yuan_lab/public_data/TCGA_luad/pigment/ss1x8_tme_tissue21_90000_tumorBed5_DCP20_90000_segformerTCGA768_erode21';
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/1_cws_tiling';
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/mit-b3-finetuned-tmeTCGAbrcaLUAD-e60-lr00001-s512-20x768-10x512rere/mask_ss1512';
+ref_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
+pgmn_refine = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_TMEsegDiv12sCE/mask_ss1_x8_erode21';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8_tme_tissue21_90000_tumorBed5_DCP20_90000_segformerTCGA512_erode21';
 
 
 if ~exist(dst_path, 'dir')
@@ -22,7 +22,7 @@ if ~exist(pgmn_refine, 'dir')
     mkdir(pgmn_refine)
 end
 
-files = dir(fullfile(src_path, 'TCGA-55*.svs'));
+files = dir(fullfile(src_path, '*.svs'));
 for i =1:length(files)
     file_name = files(i).name;
     disp(file_name)
