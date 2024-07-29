@@ -5,6 +5,7 @@ done
 
 # Mac-related
 .DS_Store
+._.DS_Store
 
 # matlab related
 *.asv
