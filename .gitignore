@@ -6,6 +6,11 @@ done
 # Mac-related
 .DS_Store
 
+# matlab related
+*.asv
+tme/*.asv
+pgmn/*.asv
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
