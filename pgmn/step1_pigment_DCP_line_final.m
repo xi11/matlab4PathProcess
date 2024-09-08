@@ -4,8 +4,8 @@ close all
 
 %remove line in the tile processing, should be the final version
 
-src_path = '/Volumes/yuan_lab/TIER2/anthracosis/test_patch/artefact';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/test_patch/artefact/mask_imageProcess';
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/pgmnModel/stain_edge/HE_tile';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/pgmnModel/stain_edge/mask_DCP30minC50_dilate1_remove64_pen100000_line98_ratio98';
 % src_path = 'R:\tracerx\tracerx421\HE_diagnostic_LUSC\cws';
 % dst_path = 'D:\tx421_fine_tune\LUSC_pigment_DCP30minC50_dilate1_remove64_pen100000_line98_ratio98';
 
@@ -23,10 +23,10 @@ for i =1:length(files)
         mkdir(file_path)
     end
     
-    Da_files = dir(fullfile(src_path, file_name, '*.png'));
+    Da_files = dir(fullfile(src_path, file_name, '*.jpg'));
     for j = 1:length(Da_files)
         Da_name = Da_files(j).name;
-        Da_name_new = extractBefore(Da_name, '.png');
+        Da_name_new = extractBefore(Da_name, '.jpg');
         %if ~isfile(fullfile(file_path,[Da_name_new, '.png']))
             mask_raw = imread(fullfile(src_path, file_name, Da_name));
             %mask_raw = uint8(255*NormReinhard(mask_raw_source, mask_target));

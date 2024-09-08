@@ -3,7 +3,7 @@ clc
 close all
 
 
-src_gp_mask = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_TMEsegDiv12sCE/mask_ss1_x8';
+src_gp_mask = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_TMEsegDiv12sCE_stainedgeV3_tf2p10/mask_ss1_x8';
 files = dir(fullfile(src_gp_mask, '*.png'));
 
 tableTmp = table("",0,'VariableNames',{'ID','pigment8'});
@@ -27,4 +27,4 @@ for i = 1:k
     tableTmp.pigment8(i) = gp_pix(i, 1);
         
 end
-writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_TMEsegFOplaindiv12sCE/pix_pgmn/TMA5_pigment8May.xlsx')
+writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_TMEsegFOplaindiv12sCEv3/pix_pgmn/TMA5_pigment3Sep.xlsx')

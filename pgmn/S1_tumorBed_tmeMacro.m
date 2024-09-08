@@ -6,9 +6,9 @@ close all
 %segmentation, mainly reduce the influence of artefacts from backgound,
 %compress lung, which can be removed by overlaying tme-seg masks, basically
 %if an individual component doesn't have tumor detected, then remove.
-src_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/tbed1536_ss1/maskLuadLusc';
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000';
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/TbedEval/breast/tbed1536_ss1/maskLuadLusc';
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/TbedEval/breast/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/TbedEval/breast/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
@@ -19,7 +19,7 @@ files = dir(fullfile(src_path, '*.png'));
 for i =1:length(files)
     file_name = files(i).name(1:end-9);
     disp(file_name)
-    %if ~isfile(fullfile(dst_path, [file_name, '_tme_tumorBed.png']))
+    if ~isfile(fullfile(dst_path, [file_name, '_tme_tbed.png']))
         mask_raw = imread(fullfile(src_path, [file_name,  '_tbed.png']));
         %if isfile(fullfile(src_path, file_name, 'Ss1.jpg'))
         mask_tme = imread(fullfile(tme_path, [file_name, '.svs_Ss1.png']));
@@ -64,7 +64,7 @@ for i =1:length(files)
        
         mask_final = uint8(mask_bed) .* mask_raw;
         imwrite(mask_final, fullfile(dst_path, [file_name, '_tme_tbed.png']))
-    %end
+    end
 end
 
 
