@@ -3,7 +3,7 @@ clc
 close all
 
 
-src_gp_mask = '/Volumes/yuan_lab/TIER2/anthracosis/prospect/AIgrading/mask_ss1_final';
+src_gp_mask = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/AIgrading/mask_ss1_final';
 
 files = dir(fullfile(src_gp_mask, '*.png'));
 
@@ -48,4 +48,4 @@ for i = 1:k
 %           
 end
 
-writetable(tableTmp, '/Volumes/yuan_lab/TIER2/anthracosis/prospect/AIgrading/GP_pix_x16.xlsx')
+writetable(tableTmp, '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/AIgrading/GP_pix_x16.xlsx')

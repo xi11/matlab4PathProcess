@@ -3,23 +3,23 @@ clc;
 close all
 
 %to overlay tissue, tumor-bed
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
-tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000';
-pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_TMEsegDiv12sCE_stainedgeV3_tf2p10/mask_ss1_x8';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/ss1x8overlay_alveoli_tbed_remove90000';
-
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
+tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000';
+pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/pgmn_TMEsegDiv12sCE_stainedgeV3_tf2p10/mask_ss1_x8';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/ss1x8overlay_alveoli_tbed_remove90000';
+ 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
 tbed_corlor = [135, 133, 186];
 tissue_color = [0, 128, 0];  %alveoli
-files = dir(fullfile(tme_path, '*.png'));
+files = dir(fullfile(tbed_path, '*.png'));
 for i =1:length(files)
-    file_name = files(i).name(1: end-12);
+    file_name = files(i).name(1: end-13); %-13 / -9
     disp(file_name)
-        mask_tbed = imread(fullfile(tbed_path, [file_name, '_tme_tbed.png']));
-        mask_tme = imread(fullfile(tme_path, [file_name, '.svs_Ss1.png']));
-        mask_pgmn = imread(fullfile(pgmn_path, [file_name, '.svs_Ss1.png']));
+        mask_tbed = imread(fullfile(tbed_path, [file_name, '_tme_tbed.png'])); %_tme_tbed.png / _tbed.png
+        mask_tme = imread(fullfile(tme_path, [file_name, '.tif_Ss1.png']));
+        mask_pgmn = imread(fullfile(pgmn_path, [file_name, '.tif_Ss1.png']));
         [m, n, ~] = size(mask_pgmn);
         mask_tbed = imresize(mask_tbed, [m, n], 'nearest');
 
@@ -58,6 +58,6 @@ for i =1:length(files)
         %mask_pgmn_re = mask_pgmn_re(:,:,1);
         %mask_final(repmat(logical(mask_pgmn_re), [1, 1, 3])) = 255;
        
-        imwrite(mask_final, fullfile(dst_path, [file_name, '.svs_alveoli_tbed.png']))
+        imwrite(mask_final, fullfile(dst_path, [file_name, '.tif_alveoli_tbed.png']))
    
 end

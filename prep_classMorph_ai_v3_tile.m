@@ -2,13 +2,13 @@ clc
 clear
 close all;
 %% class: raw classification; class2: refined classification
-data_folder = '/Volumes/yuan_lab/TIER2/share_tls-st/HE/til_json/4_cell_class_segformerBRCA/csv'; %annotations / cells
-seg_folder = '/Volumes/yuan_lab/TIER2/share_tls-st/HE/til_json/3_cell_seg/mat'; %1054 in RDS, 947 in proj5, not sure how many is overlapped
-cws_folder = '/Volumes/yuan_lab/TIER2/share_tls-st/HE/til_json/1_cws_tiling';
-files = dir(fullfile(seg_folder, '*.tiff'));
+data_folder = '/Volumes/yuan_lab/TIER2/tms-st_wenyi/lung2024/4_cell_class_segformerMacro/csv'; %annotations / cells
+seg_folder = '/Volumes/yuan_lab/TIER2/tms-st_wenyi/lung2024/3_cell_seg/mat'; %1054 in RDS, 947 in proj5, not sure how many is overlapped
+cws_folder = '/Volumes/yuan_lab/TIER2/tms-st_wenyi/lung2024/1_cws_tiling';
+files = dir(fullfile(seg_folder, '*.tif'));
 
 %%
-save_folder = '/Volumes/yuan_lab/TIER2/share_tls-st/HE/til_json/cellFeatures_v3_refine';
+save_folder = '/Volumes/yuan_lab/TIER2/tms-st_wenyi/lung2024/cellFeatures_v3_refine';
 %save_filename = 'regional_tilesArea.csv';
 if ~exist(save_folder, 'dir')
     mkdir(save_folder);
