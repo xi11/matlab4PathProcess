@@ -3,14 +3,14 @@ clc
 close all
 
 
-src_gp_mask = '/Volumes/yuan_lab/TIER2/artemis_lei/validation_new2/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_post_tumor15_900';
+src_gp_mask = '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetuned-tmeTCGA-60-lr00001-s512-20x768/mask_ss1512_post_tumor15_900_tbed_orng';
 
 files = dir(fullfile(src_gp_mask, '*.png'));
 
-tableTmp = table("",0,0,0,0,0,'VariableNames',{'ID',...
-    'tumor_pix', 'necrosis_pix', 'stroma_pix', 'fat_pix', 'parenchyma_pix'});
+tableTmp = table("",0,0,0,0,0,0,0,'VariableNames',{'ID',...
+    'tumor_pix', 'necrosis_pix', 'stroma_pix', 'fat_pix', 'parenchyma_pix', 'blood_pix', 'inflam_pix'});
 k = length(files);
-gp_pix = zeros(k, 5);
+gp_pix = zeros(k, 7);
 for i = 1:k
     file_name = files(i).name;
     wsi_ID = extractBefore(file_name, '_Ss1.png');
@@ -19,21 +19,22 @@ for i = 1:k
     temp = [];
     [m, n, ~] = size(img);
     mask_digit = zeros(m, n);
-    %mask_digit((img(:,:,1)==255 & img(:,:,2)==0 & img(:,:,3)==0)) = 1; %inflam
     mask_digit((img(:,:,1)==255 & img(:,:,2)==0 & img(:,:,3)==255)) = 1; %necrosis
     mask_digit((img(:,:,1)==128 & img(:,:,2)==0 & img(:,:,3)==0)) = 2; %tumor
-    mask_digit((img(:,:,1)==255 & img(:,:,2)==255 & img(:,:,3)==0)) = 3; %stroma
+    mask_digit((img(:,:,1)==255 & img(:,:,2)==204 & img(:,:,3)==0)) = 3; %stroma
     mask_digit((img(:,:,1)==128 & img(:,:,2)==128 & img(:,:,3)==0)) = 4; %fat
     mask_digit((img(:,:,1)==0 & img(:,:,2)==255 & img(:,:,3)==255)) = 5; %parenchyma
-    %mask_digit((img(:,:,1)==0 & img(:,:,2)==0 & img(:,:,3)==255)) = 7; %blood
+    %%added for model trained with tcga only
+    mask_digit((img(:,:,1)==0 & img(:,:,2)==0 & img(:,:,3)==255)) = 6; %blood
+    mask_digit((img(:,:,1)==255 & img(:,:,2)==0 & img(:,:,3)==0)) = 7; %inflam
 
     
-    for j = 1:5
+    for j = 1:7
         temp(j) = length(find(mask_digit(:)==j));
     end
     if max(temp)>0
     
-    gp_pix(i, 1:5) = temp;  %pix
+    gp_pix(i, 1:7) = temp;  %pix
    
     end
     
@@ -44,9 +45,11 @@ for i = 1:k
     tableTmp.stroma_pix(i) = gp_pix(i, 3);
     tableTmp.fat_pix(i) = gp_pix(i, 4);
     tableTmp.parenchyma_pix(i) = gp_pix(i, 5);
+    tableTmp.blood_pix(i) = gp_pix(i, 6);
+    tableTmp.inflam_pix(i) = gp_pix(i, 7);
  
 
 
 %           
 end
-writetable(tableTmp, '/Volumes/yuan_lab/TIER2/artemis_lei/validation_new2/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/discovery_post_tme_pix.xlsx')
+writetable(tableTmp, '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetuned-tmeTCGA-60-lr00001-s512-20x768/discovery_post_tme_tbed_pix.xlsx')

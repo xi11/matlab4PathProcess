@@ -3,8 +3,8 @@ clear;
 clc;
 close all
 %final
-src_path = '/Volumes/yuan_lab/TIER2/artemis_lei/validation_new2/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512';
-dst_path = '/Volumes/yuan_lab/TIER2/artemis_lei/validation_new2/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_post_tumor15_900';
+src_path = '/Volumes/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512';
+dst_path = '/Volumes/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_post_tumor15_900';
 
 
 if ~exist(dst_path, 'dir')
@@ -22,12 +22,10 @@ for i =1:length(files)
         [m, n, ~] = size(mask_tme);
 mask_tumor = zeros(m, n);
         mask_tumor(mask_tme(:,:,1)==128 & mask_tme(:,:,2)==0 &mask_tme(:,:,3)==0) = 255;
-        %mask_tumor(mask_tme(:,:,1)==255 & mask_tme(:,:,2)==0
-        %&mask_tme(:,:,3)==0) = 255; %no red/inflam
-        mask_tumor(mask_tme(:,:,1)==255 & mask_tme(:,:,2)==0 &mask_tme(:,:,3)==255) = 255;
-        mask_tumor(mask_tme(:,:,1)==255 & mask_tme(:,:,2)==255 &mask_tme(:,:,3)==0) = 255;
-        mask_tumor(mask_tme(:,:,1)==0 & mask_tme(:,:,2)==255 &mask_tme(:,:,3)==255) = 255;
-        mask_tumor(mask_tme(:,:,1)==128 & mask_tme(:,:,2)==128 &mask_tme(:,:,3)==0) = 255;
+        mask_tumor(mask_tme(:,:,1)==255 & mask_tme(:,:,2)==0 &mask_tme(:,:,3)==255) = 255; %necrosis
+        mask_tumor(mask_tme(:,:,1)==255 & mask_tme(:,:,2)==204 &mask_tme(:,:,3)==0) = 255; %stroma
+        mask_tumor(mask_tme(:,:,1)==0 & mask_tme(:,:,2)==255 &mask_tme(:,:,3)==255) = 255; %benign
+        mask_tumor(mask_tme(:,:,1)==128 & mask_tme(:,:,2)==128 &mask_tme(:,:,3)==0) = 255; %adipose
         
         mask_tumor = imfill(mask_tumor, 'holes');
         se1 = strel('disk', 15);  %to set
