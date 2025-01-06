@@ -2,23 +2,39 @@ clear;
 clc;
 close all
 
-src_path = '/Users/xiaoxipan/Documents/project/public_data/bcss/luad_annotation_xp/patch512_mpp44muscle/hardcrop';
-dst_path = '/Users/xiaoxipan/Documents/project/public_data/bcss/luad_annotation_xp/patch512_mpp44muscle/hardcrop';
+%%%Tanishq tumor bed
+src_path = '/Volumes/idso_fa1_pathology/TIER2/tanishq-sample-selection/Tube_training_data';
+dst_path = '/Volumes/idso_fa1_pathology/TIER2/tanishq-sample-selection/Tube_training_ss1/ss1/mask';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
 
-files = dir(fullfile(src_path, '*-labelled.png'));
+files = dir(fullfile(src_path, '*.png'));
 for i =1:length(files)
     file_name = files(i).name;
     disp(file_name)
     mask = imread(fullfile(src_path, file_name));
-    %%mask(mask==5) = 10; %update muscle class to 10
-    %mask(mask==5) = 8;
-    %mask(mask==6) = 9;
-    imwrite(mask, fullfile(dst_path, ['mask_',file_name(1:end-13), '.png']));
+    imwrite(mask*255, fullfile(dst_path, file_name));
 end
+
+% src_path = '/Users/xiaoxipan/Documents/project/public_data/bcss/luad_annotation_xp/patch512_mpp44muscle/hardcrop';
+% dst_path = '/Users/xiaoxipan/Documents/project/public_data/bcss/luad_annotation_xp/patch512_mpp44muscle/hardcrop';
+% 
+% if ~exist(dst_path, 'dir')
+%     mkdir(dst_path)
+% end
+% 
+% files = dir(fullfile(src_path, '*-labelled.png'));
+% for i =1:length(files)
+%     file_name = files(i).name;
+%     disp(file_name)
+%     mask = imread(fullfile(src_path, file_name));
+%     %%mask(mask==5) = 10; %update muscle class to 10
+%     %mask(mask==5) = 8;
+%     %mask(mask==6) = 9;
+%     imwrite(mask, fullfile(dst_path, ['mask_',file_name(1:end-13), '.png']));
+% end
 
 
 %color code for tcga-luad annotaed by xp in June to resolve macrophage

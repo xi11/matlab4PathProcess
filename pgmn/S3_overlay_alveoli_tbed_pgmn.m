@@ -6,7 +6,7 @@ close all
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
 tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000';
 pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/pgmn_TMEsegDiv12sCE_stainedgeV3_tf2p10/mask_ss1_x8';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/ss1x4overlay_alveoli_tbedraw_remove90000';  %default ss1x8overlay_alveoli_tbed_remove90000
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/ss1x8overlay_pgmn_alveoli_tbedraw_remove90000';  %default ss1x8overlay_alveoli_tbed_remove90000
  
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
@@ -58,7 +58,7 @@ for i =1:length(files)
         %%for better visualization
         mask_pgmn_re = mask_pgmn_re(:,:,1);
         mask_final(repmat(logical(mask_pgmn_re), [1, 1, 3])) = 255;
-        mask_final = imresize(mask_final,2,'nearest');
+        %mask_final = imresize(mask_final,2,'nearest');
 
         imwrite(mask_final, fullfile(dst_path, [file_name, '.tif_alveoli_tbed.png']))
    

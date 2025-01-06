@@ -21,7 +21,7 @@ if ~exist(dst_path, 'dir')
 end
 
 
-files = dir(fullfile(src_path, '*.png'));
+files = dir(fullfile(src_path, '*104*.png'));
 for i =1:length(files)
     file_name = files(i).name(1:end-9);
     disp(file_name)
