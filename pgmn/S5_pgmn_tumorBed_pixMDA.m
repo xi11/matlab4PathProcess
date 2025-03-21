@@ -3,8 +3,8 @@ clc
 close all
 
 
-pgmn_mask = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_TMEsegDiv12sCE_stainedgeV3_tf2p10/mask_ss1_x8';
-tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8overlay_alveoli_tbed_remove90000_nec';
+pgmn_mask = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8';
+tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_tbed_remove90000_necLN';
 files = dir(fullfile(pgmn_mask, '*.png'));
 tbed_corlor = [135, 133, 186];
 tissue_color = [243, 205, 204];
@@ -40,4 +40,4 @@ for i = 1:k
     tableTmp.tissue8(i) = gp_pix(i, 4);
         
 end
-writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_TMEsegFOplaindiv12sCEv3/pix_pgmn_necrosis_tbedRevisit/cptac_pgmn_tbed_alveoli.xlsx')
+writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_segformerv3/pix_pgmn_necrosis_tbedRevisit/tcga_pgmn_tbed_alveoli_LN.xlsx')

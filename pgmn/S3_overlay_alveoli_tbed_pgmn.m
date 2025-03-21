@@ -3,10 +3,10 @@ clc;
 close all
 
 %to overlay tissue, tumor-bed
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
-tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000';
-pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/pgmn_TMEsegDiv12sCE_stainedgeV3_tf2p10/mask_ss1_x8';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/ss1x8overlay_pgmn_alveoli_tbedraw_remove90000';  %default ss1x8overlay_alveoli_tbed_remove90000
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
+tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000';
+pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/pgmn_segformer_stainedgeV3/mask_ss1_x8';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/ss1x8overlay_pgmn_alveoli_tbedraw_remove90000';  %default ss1x8overlay_alveoli_tbed_remove90000
  
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
