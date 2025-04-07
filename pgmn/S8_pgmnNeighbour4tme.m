@@ -5,8 +5,8 @@ close all
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
 pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8';
 tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/ss1x8overlay_alveoli_tbed_remove90000LN_nec';
-dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_dilate15_5_filter25_4tme';
-dst_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_dilate15_5neighbour_filter25_4tme';
+dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_dilate15_3filter25_4tme';
+dst_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_dilate15_3filter25_neighbour_4tme';
 if ~exist(dst_path1, 'dir')
     mkdir(dst_path1)
 end
@@ -49,7 +49,7 @@ for i =1:length(files)
         mask_pgmn_neigh = 255*uint8(pgmn_neigh);
         imwrite(mask_pgmn_neigh, fullfile(dst_path1, [file_name, '_4tme.png']));
         
-        radius_pgmn = 5;
+        radius_pgmn = 3;
         se1 = strel('disk', radius_pgmn);
         pgmn_neigh3 = imdilate(pgmn_filtered, se1); % to eliminate noise
         pgmn_neigh3 = imfill(pgmn_neigh3 , 'holes');
