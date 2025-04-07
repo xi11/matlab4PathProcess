@@ -5,8 +5,8 @@ close all
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
 pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8';
 tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/ss1x8overlay_alveoli_tbed_remove90000LN_nec';
-dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_dilate15_3filter25_4tme';
-dst_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_dilate15_3filter25_neighbour_4tme';
+dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_3filter100_dilate15_4tme';
+dst_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_3filter100_dilate15_neighbour_4tme';
 if ~exist(dst_path1, 'dir')
     mkdir(dst_path1)
 end
@@ -32,15 +32,23 @@ for i =1:length(files)
 
         %pgmn_mask = pgmn_raw .* tbed_mask;
         pgmn_mask = pgmn_raw(:,:,1) > 0;
+        radius_pgmn = 3;
+        se1 = strel('disk', radius_pgmn);
+        pgmn_neigh3 = imdilate(pgmn_mask, se1); % to eliminate noise
+        pgmn_neigh3 = imfill(pgmn_neigh3 , 'holes');
+        
+        mask_pgmn_neigh3 = 255*uint8(pgmn_neigh3);
+        imwrite(mask_pgmn_neigh3, fullfile(dst_path1, [file_name, '_4tme_dilate3.png']));
+
         % Get connected components
-        CC = bwconncomp(pgmn_mask);
+        CC = bwconncomp(pgmn_neigh3);
         component_sizes = cellfun(@numel, CC.PixelIdxList);
         
         % Find components larger than threshold
-        large_components = component_sizes > 25;
+        large_components = component_sizes > 100;
         
         % Create new mask with only large components
-        pgmn_filtered = false(size(pgmn_mask));
+        pgmn_filtered = false(size(pgmn_neigh3));
         pgmn_filtered(cat(1, CC.PixelIdxList{large_components})) = true;
 
         radius = 15;
@@ -49,14 +57,7 @@ for i =1:length(files)
         mask_pgmn_neigh = 255*uint8(pgmn_neigh);
         imwrite(mask_pgmn_neigh, fullfile(dst_path1, [file_name, '_4tme.png']));
         
-        radius_pgmn = 3;
-        se1 = strel('disk', radius_pgmn);
-        pgmn_neigh3 = imdilate(pgmn_filtered, se1); % to eliminate noise
-        pgmn_neigh3 = imfill(pgmn_neigh3 , 'holes');
         
-        mask_pgmn_neigh3 = 255*uint8(pgmn_neigh3);
-        imwrite(mask_pgmn_neigh3, fullfile(dst_path1, [file_name, '_4tme_dilate3.png']));
-
         pgmn_neigh_only = pgmn_neigh & ~pgmn_neigh3;
         mask_neigh = 255*uint8(pgmn_neigh_only);
         imwrite(mask_neigh, fullfile(dst_path2, [file_name, '_neighbour4tme.png']));
