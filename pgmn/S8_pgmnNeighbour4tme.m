@@ -2,11 +2,11 @@ clear;
 clc;
 close all
 
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
-pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8';
-tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/ss1x8overlay_alveoli_tbed_remove90000LN_nec';
-dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_5filter100_dilate29_4tme';
-dst_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_5filter100_dilate29_neighbour_4tme';
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8';
+tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8overlay_alveoli_tbed_remove90000_nec';
+dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_5filter100_dilate15_4tme';
+dst_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_5filter100_dilate15_neighbour_4tme';
 if ~exist(dst_path1, 'dir')
     mkdir(dst_path1)
 end
@@ -51,7 +51,7 @@ for i =1:length(files)
         pgmn_filtered = false(size(pgmn_neigh3));
         pgmn_filtered(cat(1, CC.PixelIdxList{large_components})) = true;
 
-        radius = 29; %98.56um
+        radius = 15; %29pixel: 98.62um
         se = strel('disk', radius);
         pgmn_neigh = imdilate(pgmn_filtered, se);
         mask_pgmn_neigh = 255*uint8(pgmn_neigh);
