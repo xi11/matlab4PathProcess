@@ -12,7 +12,7 @@ alveoli_color = [0, 128, 0];
 
 tableTmp = table("",0, 0, 0,0,'VariableNames',{'ID','pgmn_tbed', 'pgmn_norm', 'tumor_bed', 'tissue8'});
 k = length(files);
-gp_pix = zeros(k, 4);
+pgmn_pix = zeros(k, 4);
 for i = 1:k
     file_name = files(i).name;
     wsi_ID = extractBefore(file_name, '.svs_Ss1.png');
@@ -27,17 +27,17 @@ for i = 1:k
     pgmn_norm_area = length(find(pgmn_tissue(:) == 128));
 
     
-    gp_pix(i, 1) = isempty(tumor_bed_area) * 0 + ~isempty(tumor_bed_area) * tumor_bed_area;
-    gp_pix(i, 2) = isempty(pgmn_tbed_area) * 0 + ~isempty(pgmn_tbed_area) * pgmn_tbed_area;
-    gp_pix(i, 3) = isempty(pgmn_norm_area) * 0 + ~isempty(pgmn_norm_area) * pgmn_norm_area;
-    gp_pix(i, 4) = tissue_area;
+    pgmn_pix(i, 1) = isempty(tumor_bed_area) * 0 + ~isempty(tumor_bed_area) * tumor_bed_area;
+    pgmn_pix(i, 2) = isempty(pgmn_tbed_area) * 0 + ~isempty(pgmn_tbed_area) * pgmn_tbed_area;
+    pgmn_pix(i, 3) = isempty(pgmn_norm_area) * 0 + ~isempty(pgmn_norm_area) * pgmn_norm_area;
+    pgmn_pix(i, 4) = tissue_area;
     
     
     tableTmp.ID(i) = wsi_ID;
-    tableTmp.pgmn_tbed(i) = gp_pix(i, 2);
-    tableTmp.pgmn_norm(i) = gp_pix(i, 3);
-    tableTmp.tumor_bed(i) = gp_pix(i, 1);
-    tableTmp.tissue8(i) = gp_pix(i, 4);
+    tableTmp.pgmn_tbed(i) = pgmn_pix(i, 2);
+    tableTmp.pgmn_norm(i) = pgmn_pix(i, 3);
+    tableTmp.tumor_bed(i) = pgmn_pix(i, 1);
+    tableTmp.tissue8(i) = pgmn_pix(i, 4);
         
 end
 writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_segformerv3/pix_pgmn_necrosis_tbedRevisit/tcga_pgmn_tbed_alveoli_LN.xlsx')
