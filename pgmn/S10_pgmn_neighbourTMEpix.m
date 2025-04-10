@@ -36,6 +36,7 @@ for i =1:length(files)
     pgmn_tme_tbed = imread(fullfile(src_path1, file_name_raw));
     pgmn_tme_lung = imread(fullfile(src_path2, [file_name, '_pgmnNeighbour_tme_lung.png']));
 
+    result_table = [];
     for region_type = ["tbed", "lung"]
         if region_type == "tbed"
             region_mask = pgmn_tme_tbed;
@@ -46,7 +47,7 @@ for i =1:length(files)
         region_mask_bin = rgb2gray(region_mask) >0;
         CC = bwconncomp(region_mask_bin);
         props = regionprops(CC, 'PixelIdxList');
-        result_table = [];
+        
 
         for j = 1:length(props)
             idx = props(j).PixelIdxList;
@@ -81,7 +82,7 @@ for i =1:length(files)
         'VariableNames', [{'file_name', 'component_id', 'region_type'}, ...
         strcat(tissue_labels, '_per')]);
 
-    writetable(T, fullfile(dst_path, [file_name '_merged_components.xlsx']));
+    writetable(T, fullfile(dst_path, [file_name '_merged.xlsx']));
 
 
 end
