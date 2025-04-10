@@ -44,7 +44,7 @@ for i =1:length(files)
 
     % Extract tme values within pgmn & not tbed
     pgmn_tme_lung = tme_mask .* uint8(pgmn_mask & lung_mask);
-    imwrite(pgmn_tme_lung, fullfile(dst_path2, [file_name, '_pgmnNeighbour_tme_tbed_lung.png']));
+    imwrite(pgmn_tme_lung, fullfile(dst_path2, [file_name, '_pgmnNeighbour_tme_lung.png']));
 end
 
 
