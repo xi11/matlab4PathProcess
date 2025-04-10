@@ -13,8 +13,8 @@ if ~exist(dst_path, 'dir')
 end
 tbed_corlor = [135, 133, 186];
 tissue_color = [0, 128, 0];  %alveoli
-files = dir(fullfile(tbed_path, '*.png'));
-for i =1:length(files)
+files = dir(fullfile(tbed_path, '*tbed.png'));
+for i =1:1%length(files)
     file_name = files(i).name(1: end-13); %-13 / -9
     disp(file_name)
         mask_tbed = imread(fullfile(tbed_path, [file_name, '_tme_tbed.png'])); %_tme_tbed.png / _tbed.png
