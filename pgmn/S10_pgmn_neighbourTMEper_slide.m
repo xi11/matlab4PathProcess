@@ -26,7 +26,7 @@ tissue_colors = {
 tissue_labels = {'tumor', 'stroma', 'inflammatory', 'necrosis', ...
     'adipose', 'bronchi', 'microvessel', ...
     'macrophage', 'alveoli', 'muscle'};
-
+result_table = [];
 files = dir(fullfile(src_path1, '*.png'));
 for i =1:length(files)
     file_name_raw = files(i).name;
@@ -35,8 +35,7 @@ for i =1:length(files)
 
     pgmn_tme_tbed = imread(fullfile(src_path1, file_name_raw));
     pgmn_tme_lung = imread(fullfile(src_path2, [file_name, '_pgmnNeighbour_tme_lung.png']));
-
-    result_table = [];
+    
     for region_type = ["tbed", "lung"]
         if region_type == "tbed"
             region_mask = pgmn_tme_tbed;
@@ -76,7 +75,7 @@ end
 
 T = cell2table(result_table, ...
     'VariableNames', [{'file_name', 'region_type'}, tissue_labels]);
-writetable(T, fullfile(dst_path, 'AllSlides_TissuePercentages.xlsx'));
+writetable(T, fullfile(dst_path, 'tma5_pgmnNeighbour_TMEper.xlsx'));
 
 
 
