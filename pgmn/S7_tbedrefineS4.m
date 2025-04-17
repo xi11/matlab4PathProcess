@@ -54,7 +54,7 @@ for i =1:length(files)
         mask_tissue(repmat(mask_remove, [1 1 3])) = 0;
         mask_bed = tbed_raw;
         mask_tissue = logical(rgb2gray(mask_tissue));
-        %mask_tissue = imfill(mask_tissue, 'holes');
+        %mask_tissue = imfill(mask_tissue, 'holes'); 
       
         se2 = strel('square',3);  %to set
         mask_tissue  = imclose(mask_tissue , se2);
@@ -108,8 +108,8 @@ for i =1:length(files)
         BW3 = logical(mask_tbed_refine);
 
         mask_tissue0 = imresize(mask_tissue0, [m1, n1], 'nearest');
-        mask_non_tumor = mask_tissue0 & BW2 & ~BW3;
-        area_non_tumor =nnz(mask_non_tumor)
+        mask_non_tumor = logical(rgb2gray(mask_raw)) & mask_tissue0 & BW2 & ~BW3; % remove LN and necrosis
+        area_non_tumor = nnz(mask_non_tumor)
         mask_lung = zeros(m, n);
         mask_lung(mask_tme(:,:,1)==0 & mask_tme(:,:,2)==128 &mask_tme(:,:,3)==0) = 1;
         mask_lung = imresize(mask_lung, [m1, n1], 'nearest');
@@ -122,7 +122,7 @@ for i =1:length(files)
         end
 
         
-        mask_alveoli = mask_tissue0 .*BW2;
+        mask_alveoli = logical(rgb2gray(mask_raw)) .*mask_tissue0 .*BW2; %% remove LN and necrosis
 
         tissue1 = tissue_color(1) *uint8(mask_alveoli);
         tissue2 = tissue_color(2) *uint8(mask_alveoli);
