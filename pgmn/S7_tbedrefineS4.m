@@ -22,7 +22,7 @@ close all
 src_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_tbed_remove90000_necLN';
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/tme/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
 %dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc_tmeMacro_nonAlveoli_tumor5per_remove10000';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_tbedAlveoli_remove90000_necLN';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_tbedAlveoli40000tme_remove90000_necLN';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
@@ -105,19 +105,20 @@ for i =1:length(files)
         idx2 = find([stats2.Area] >= 90000); %dont change
         BW2 = ismember(labelmatrix(cc2),idx2);
         BW2 = imresize(BW2, [m1, n1], 'nearest');
-        BW3 = logical(mask_tbed_refine);
+ 
 
         mask_tissue0 = imresize(mask_tissue0, [m1, n1], 'nearest');
+        BW3 = logical(mask_tbed_refine) & mask_tissue0;
         mask_non_tumor = logical(rgb2gray(mask_raw)) & mask_tissue0 & BW2 & ~BW3; % remove LN and necrosis
-        area_non_tumor = nnz(mask_non_tumor)
+        area_non_tumor = nnz(mask_non_tumor);
         mask_lung = zeros(m, n);
         mask_lung(mask_tme(:,:,1)==0 & mask_tme(:,:,2)==128 &mask_tme(:,:,3)==0) = 1;
         mask_lung = imresize(mask_lung, [m1, n1], 'nearest');
         mask_non_tumor_lung = mask_non_tumor & logical(mask_lung);
-        area_non_tumor_lung =nnz(mask_non_tumor_lung);
+        area_non_tumor_lung =nnz(mask_non_tumor_lung)
 
 
-        if area_non_tumor_lung/area_non_tumor <= 0.2
+        if area_non_tumor_lung <= 40000 %area_non_tumor_lung/area_non_tumor <= 0.2
             BW2 = BW3;
         end
 
