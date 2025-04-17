@@ -17,10 +17,12 @@ close all
 %compress lung, which can be removed by overlaying tme-seg masks, basically
 %if an individual component doesn't have tumor detected, then remove.
 
-src_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8overlay_alveoli_tbed_remove90000_nec';
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+% Apr 16: add gaussian filter to smooth the edge
+
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_tbed_remove90000_necLN';
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/tme/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
 %dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc_tmeMacro_nonAlveoli_tumor5per_remove10000';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8overlay_alveoli_tbedAlveoli_remove90000_nec';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_tbedAlveoli_remove90000_necLN';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
@@ -52,7 +54,7 @@ for i =1:length(files)
         mask_tissue(repmat(mask_remove, [1 1 3])) = 0;
         mask_bed = tbed_raw;
         mask_tissue = logical(rgb2gray(mask_tissue));
-        mask_tissue = imfill(mask_tissue, 'holes');
+        %mask_tissue = imfill(mask_tissue, 'holes');
       
         se2 = strel('square',3);  %to set
         mask_tissue  = imclose(mask_tissue , se2);
@@ -83,9 +85,13 @@ for i =1:length(files)
                 mask_bed(componentPixels) = 0;  % Set the pixels to black (or any background color)
             end
         end
+
+        mask_bed = imgaussfilt(double(mask_bed), 30); %30 is the final to use
+        mask_bed = mask_bed > 0.5;
        
         mask_tbed_refine = uint8(mask_bed) .* uint8(tbed_raw);  %refined tumor bed
         mask_tbed_refine  = imresize(mask_tbed_refine , [m1, n1], 'nearest');
+
 
         %%%%tissue
         mask_tissue0 = logical(rgb2gray(mask_tme));
@@ -99,10 +105,25 @@ for i =1:length(files)
         idx2 = find([stats2.Area] >= 90000); %dont change
         BW2 = ismember(labelmatrix(cc2),idx2);
         BW2 = imresize(BW2, [m1, n1], 'nearest');
+        BW3 = logical(mask_tbed_refine);
+
         mask_tissue0 = imresize(mask_tissue0, [m1, n1], 'nearest');
+        mask_non_tumor = mask_tissue0 & BW2 & ~BW3;
+        area_non_tumor =nnz(mask_non_tumor)
+        mask_lung = zeros(m, n);
+        mask_lung(mask_tme(:,:,1)==0 & mask_tme(:,:,2)==128 &mask_tme(:,:,3)==0) = 1;
+        mask_lung = imresize(mask_lung, [m1, n1], 'nearest');
+        mask_non_tumor_lung = mask_non_tumor & logical(mask_lung);
+        area_non_tumor_lung =nnz(mask_non_tumor_lung);
+
+
+        if area_non_tumor_lung/area_non_tumor <= 0.2
+            BW2 = BW3;
+        end
+
+        
         mask_alveoli = mask_tissue0 .*BW2;
 
-        BW3 = logical(mask_tbed_refine);
         tissue1 = tissue_color(1) *uint8(mask_alveoli);
         tissue2 = tissue_color(2) *uint8(mask_alveoli);
         tissue3 = tissue_color(3) *uint8(mask_alveoli);
