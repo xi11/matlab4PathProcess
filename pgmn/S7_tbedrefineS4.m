@@ -122,7 +122,7 @@ for i =1:length(files)
         end
 
         
-        mask_alveoli = logical(rgb2gray(mask_raw)) .*mask_tissue0 .*BW2; %% remove LN and necrosis
+        mask_alveoli = mask_tissue0 .*BW2; %% remove LN and necrosis
 
         tissue1 = tissue_color(1) *uint8(mask_alveoli);
         tissue2 = tissue_color(2) *uint8(mask_alveoli);
