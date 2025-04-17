@@ -21,10 +21,10 @@ close all
 % ss1x8overlay_alveoli_tbed_remove90000, which will then need to re run
 % S4_removeLN/nec
 
-src_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8overlay_alveoli_tbed_remove90000';
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker_multi/ss1x8overlay_alveoli_tbed_remove90000LN';
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker_multi/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
 %dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc_tmeMacro_nonAlveoli_tumor5per_remove10000';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8overlay_alveoli_tbedAlveoli81000tme_close5remove90000';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker_multi/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000LN';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
@@ -77,11 +77,11 @@ for i =1:length(files)
             tumorArea = sum(mask_tumor(componentPixels));
     
             % Calculate the tumor area percentage
-            tumorPer = tumorArea / componentArea;
-            % If tumor area is less than 5%, remove the component
-            if tumorPer < 0.05 
-                mask_bed(componentPixels) = 0;  % Set the pixels to black (or any background color)
-            end
+%             tumorPer = tumorArea / componentArea;
+%             % If tumor area is less than 5%, remove the component
+%             if tumorPer < 0.05 
+%                 mask_bed(componentPixels) = 0;  % Set the pixels to black (or any background color)
+%             end
 
             if componentArea < 10000
                 mask_bed(componentPixels) = 0;  % Set the pixels to black (or any background color)
