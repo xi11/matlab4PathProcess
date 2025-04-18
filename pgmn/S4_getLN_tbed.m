@@ -4,9 +4,9 @@ close all
 
 % to get LN annotated by Maria and processed by Xiaoxi for internal data
 % tcga has been confirmed with Maria and annotated by Xiaoxi
-src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/LN_NS_all_mask/multi';
-src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker_multi/ss1x8overlay_tissue_tbed_remove90000LN_nec';
-dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/LN_NS_all_mask/multi_LN_mask';
+src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/LN_TMA5_mask/LN_annotation';
+src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/ss1x8overlay_tissue_tbed_remove90000LN';
+dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/LN_TMA5_mask/LN_mask';
 
 if ~exist(dst_path1, 'dir')
     mkdir(dst_path1)

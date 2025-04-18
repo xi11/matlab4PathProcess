@@ -15,6 +15,7 @@ tbed_corlor = [135, 133, 186];
 tissue_color = [243, 205, 204];
 alveoli_color = [0, 128, 0];
 
+
 tableTmp = table("",0, 0, 0,0,'VariableNames',{'ID','pgmn_tbed', 'pgmn_norm', 'tumor_bed', 'tissue8'});
 k = length(files);
 pgmn_pix = zeros(k, 4);
