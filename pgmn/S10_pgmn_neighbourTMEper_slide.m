@@ -3,9 +3,9 @@ clc;
 close all
 
 
-src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_4tme_tbed';
-src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_4tme_lung';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3';
+src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate5_4tme_tbed';
+src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate5_4tme_lung';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/pgmn_segformer_stainedgeV3';
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
@@ -27,6 +27,7 @@ tissue_labels = {'tumor', 'stroma', 'inflammatory', 'necrosis', ...
     'adipose', 'bronchi', 'microvessel', ...
     'macrophage', 'alveoli', 'muscle'};
 result_table = [];
+result_table_pix = [];
 files = dir(fullfile(src_path1, '*.png'));
 for i =1:length(files)
     file_name_raw = files(i).name;
@@ -55,18 +56,22 @@ for i =1:length(files)
             total_pixels = size(region_colors, 1);
 
             tissue_row = zeros(1, length(tissue_labels));
+            tissue_row_pix = zeros(1, length(tissue_labels));
             for k = 1:length(tissue_labels)
                 ref_color = tissue_colors{k,1};
                 match = all(region_colors == ref_color, 2);
                 count = sum(match);
                 tissue_row(k) = count / total_pixels * 100;
+                tissue_row_pix(k) = count;
             end
         else
             tissue_row = zeros(1, length(tissue_labels));
+            tissue_row_pix = zeros(1, length(tissue_labels));
         end
 
         % Append one row: slide, region, percentages
         result_table = [result_table; [{file_name, char(region_type)}, num2cell(tissue_row)]];
+        result_table_pix = [result_table_pix; [{file_name, char(region_type)}, num2cell(tissue_row_pix)]];
 
 
     end
@@ -75,7 +80,11 @@ end
 
 T = cell2table(result_table, ...
     'VariableNames', [{'file_name', 'region_type'}, tissue_labels]);
-writetable(T, fullfile(dst_path, 'tma5_pgmnNeighbour_TMEper.xlsx'));
+T1 = cell2table(result_table_pix, ...
+    'VariableNames', [{'file_name', 'region_type'}, tissue_labels]);
+writetable(T, fullfile(dst_path, 'pgmnNeighbour_TMEper.xlsx'));
+writetable(T1, fullfile(dst_path, 'pgmnNeighbour_TMEpix.xlsx'));
+
 
 
 
