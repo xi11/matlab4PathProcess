@@ -3,9 +3,9 @@ clc
 close all
 
 
-pgmn_mask = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8';
-tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/LN_tcga-luad_ss1/LN_mask';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_LN';
+pgmn_mask = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8';
+tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/LN_TMA5_mask/LN_mask';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_LN';
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
@@ -43,4 +43,4 @@ for i = 1:k
   
         
 end
-writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_segformerv3/pix_pgmn_necrosis_tbedRevisit/tcga_pgmn_inLN.xlsx')
+writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_segformerv3/pix_pgmn_necrosis_tbedRevisit/TMA5_pgmn_inLN.xlsx')

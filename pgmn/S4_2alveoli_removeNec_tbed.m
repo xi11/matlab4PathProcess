@@ -13,7 +13,7 @@ end
 
 
 files = dir(fullfile(src_path1, '*.png'));
-for i =1:length(files)
+for i =339:length(files)
     file_name = files(i).name(1: end-12);
     disp(file_name)
     mask_tme = imread(fullfile(src_path1, files(i).name));
