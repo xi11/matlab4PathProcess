@@ -4,8 +4,8 @@ close all
 
 
 pgmn_mask = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8';
-tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_tbed_remove90000_necLN';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_tbedmask';
+tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_tbedmask_wLNnec';
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
@@ -23,7 +23,7 @@ for i = 1:k
     wsi_ID = extractBefore(file_name, '.svs_Ss1.png');
     pgmn = imread(fullfile(pgmn_mask, file_name));
     pgmn = logical(pgmn(:,:,2));
-    tissue_raw = imread(fullfile(tissue_mask, [wsi_ID, '.svs_alveoli_tbed.png']));
+    tissue_raw = imread(fullfile(tissue_mask, [wsi_ID, '_tme_tbed.png'])); %.svs_alveoli_tbed.png
     tissue = tissue_raw(:,:,2);
     tissue_area = length(find(tissue(:) >0));
     tumor_bed_area = length(find(tissue(:) == 133));
