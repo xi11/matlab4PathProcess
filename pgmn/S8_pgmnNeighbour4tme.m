@@ -2,11 +2,11 @@ clear;
 clc;
 close all
 
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
-pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8';
-tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8overlay_alveoli_tbed_remove90000_nec';
-dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate5_4tme';
-dst_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate5_neighbour_4tme';
+%tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8';
+%%tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000_nec';
+dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate5_4tme';
+dst_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate5_neighbour_4tme';
 if ~exist(dst_path1, 'dir')
     mkdir(dst_path1)
 end
@@ -24,13 +24,13 @@ for i =1:length(files)
     if ~isfile(fullfile(dst_path1, [file_name, '_4tme.png']))
        
         pgmn_raw = imread(fullfile(pgmn_path, [file_name,  '.svs_Ss1.png'])); % binary mask
-        tbed_raw = imread(fullfile(tbed_path, [file_name,  '.svs_alveoli_tbed.png']));
-        [m, n, ~] = size(tbed_raw);
 
-        tbed_mask = zeros(m, n);
-        tbed_mask(tbed_raw(:,:,1)==tbed_corlor(1) & tbed_raw(:,:,2)==tbed_corlor(2) & tbed_raw(:,:,3)==tbed_corlor(3)) = 1;
-
+        %%tbed_raw = imread(fullfile(tbed_path, [file_name,  '.svs_alveoli_tbed.png']));
+        %%[m, n, ~] = size(tbed_raw);
+        %%tbed_mask = zeros(m, n);
+        %%tbed_mask(tbed_raw(:,:,1)==tbed_corlor(1) & tbed_raw(:,:,2)==tbed_corlor(2) & tbed_raw(:,:,3)==tbed_corlor(3)) = 1;
         %pgmn_mask = pgmn_raw .* tbed_mask;
+
         pgmn_mask = pgmn_raw(:,:,1) > 0;
         radius_pgmn = 1;
         se1 = strel('disk', radius_pgmn);
@@ -45,7 +45,7 @@ for i =1:length(files)
         component_sizes = cellfun(@numel, CC.PixelIdxList);
         
         % Find components larger than threshold
-        large_components = component_sizes > 0;
+        large_components = component_sizes > 0; % decide no to filter since there could be dispersed carbon particles, 
         
         % Create new mask with only large components
         pgmn_filtered = false(size(pgmn_neigh3));

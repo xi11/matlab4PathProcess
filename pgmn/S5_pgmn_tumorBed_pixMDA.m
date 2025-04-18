@@ -3,9 +3,9 @@ clc
 close all
 
 
-pgmn_mask = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8';
-tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000_nec';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_tbedmask';
+pgmn_mask = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8';
+tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000LN_nec';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_tbedmask';
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
@@ -48,4 +48,4 @@ for i = 1:k
     tableTmp.tissue8(i) = pgmn_pix(i, 4);
         
 end
-writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_segformerv3/pix_pgmn_necrosis_tbedRevisit/cptac_pgmn_tbedRefine_alveoli.xlsx')
+writetable(tableTmp, '/Users/xiaoxipan/Documents/project/anthracosis/pix_segformerv3/pix_pgmn_necrosis_tbedRevisit/TMA5_pgmn_tbedRefine_alveoliLN.xlsx')
