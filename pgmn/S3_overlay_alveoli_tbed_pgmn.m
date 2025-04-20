@@ -14,7 +14,7 @@ end
 tbed_corlor = [135, 133, 186];
 tissue_color = [0, 128, 0];  %alveoli
 files = dir(fullfile(tbed_path, '*tbed.png'));
-for i =1:1%length(files)
+for i =1:length(files)
     file_name = files(i).name(1: end-13); %-13 / -9
     disp(file_name)
         mask_tbed = imread(fullfile(tbed_path, [file_name, '_tme_tbed.png'])); %_tme_tbed.png / _tbed.png
@@ -55,9 +55,9 @@ for i =1:1%length(files)
         mask_tissue3(BW3) = tbed_corlor(3); %mask_tme3(BW3); 
         mask_final = cat(3,mask_tissue1, mask_tissue2, mask_tissue3);
         
-        %%for better visualization
-        mask_pgmn_re = mask_pgmn_re(:,:,1);
-        mask_final(repmat(logical(mask_pgmn_re), [1, 1, 3])) = 255;
+        %%for better visualization pgmn
+        %mask_pgmn_re = mask_pgmn_re(:,:,1);
+        %mask_final(repmat(logical(mask_pgmn_re), [1, 1, 3])) = 255;
         %mask_final = imresize(mask_final,2,'nearest');
 
         imwrite(mask_final, fullfile(dst_path, [file_name, '.tif_alveoli_tbed.png']))
