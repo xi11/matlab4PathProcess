@@ -3,6 +3,7 @@ clear;
 clc;
 close all
 
+%%%not use
 % this is to refine masks from ss1x8overlay_alveoli_tbed_remove90000LN_nec
 % directly, then no need to go through LN necrosis etc removal and tbed
 % revisit.

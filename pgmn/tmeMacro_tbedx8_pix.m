@@ -3,8 +3,8 @@ clc
 close all
 % note that tme masks need to upscaled by 2 times
 
-tme_mask = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/tme/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
-tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000_necLN';
+tme_mask = '/Volumes/yuan_lab/TIER2/anthracosis/prospect/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+tissue_mask = '/Volumes/yuan_lab/TIER2/anthracosis/prospect/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000LN_nec';
 files = dir(fullfile(tme_mask, '*.png'));
 tbed_corlor = [135, 133, 186];
 tissue_color = [243, 205, 204];
@@ -56,6 +56,6 @@ for i = 1:k
     tableTmp.stroma_tbed(i) = gp_pix(i, 6);
         
 end
-writetable(tableTmp, '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/tme/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/tcga_tmex8_tbedRefine_alveoliLN.xlsx')
+writetable(tableTmp, '/Volumes/yuan_lab/TIER2/anthracosis/prospect/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/prospect_tmex8_tbedRefine_alveoli.xlsx')
 
 
