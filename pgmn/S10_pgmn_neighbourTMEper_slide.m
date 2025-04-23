@@ -3,9 +3,9 @@ clc;
 close all
 
 
-src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_pgmn_tbed';
-src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_pgmn_lung';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3';
+src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_pgmn_tbed';
+src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_pgmn_lung';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3';
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
