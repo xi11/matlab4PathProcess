@@ -57,7 +57,7 @@ for i =1:length(files)
         
         %%for better visualization pgmn
         mask_pgmn_re = mask_pgmn_re(:,:,1);
-        mask_final(repmat(logical(mask_pgmn_re), [1, 1, 3])) = 250;
+        mask_final(repmat(logical(mask_pgmn_re), [1, 1, 3])) = 255;
         mask_final = imresize(mask_final,2,'nearest');
 
         imwrite(mask_final, fullfile(dst_path, [file_name, '.tif_alveoli_tbed.png']))

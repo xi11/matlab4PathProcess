@@ -84,8 +84,11 @@ for i =1:length(files)
                 mask_bed(componentPixels) = 0;  % Set the pixels to black (or any background color)
             end
 
-
         end
+        
+        %May22: add gaussfilter to smooth the boundary
+        mask_bed = imgaussfilt(double(mask_bed), 30); %30 is the final to use
+        mask_bed = mask_bed > 0.5;
        
         mask_final = uint8(mask_bed) .* mask_raw;
         imwrite(mask_final, fullfile(dst_path, [file_name, '_tme_tbed.png']))

@@ -6,9 +6,10 @@ close all
 %segmentation, mainly reduce the influence of artefacts from backgound,
 %compress lung, which can be removed by overlaying tme-seg masks, basically
 %if an individual component doesn't have tumor detected, then remove.
-src_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc';
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000';
+
+%src_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc';
+%tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
+%dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)

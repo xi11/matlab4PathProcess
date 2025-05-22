@@ -87,7 +87,9 @@ for i =1:length(files)
                 mask_bed(componentPixels) = 0;  % Set the pixels to black (or any background color)
             end
         end
-
+        
+        % No need the smooth step here if mask_tbed has already been
+        % smoothed in S1
         mask_bed = imgaussfilt(double(mask_bed), 30); %30 is the final to use
         mask_bed = mask_bed > 0.5;
        
@@ -119,7 +121,8 @@ for i =1:length(files)
         mask_non_tumor_lung = mask_non_tumor & logical(mask_lung);
         area_non_tumor_lung =nnz(mask_non_tumor_lung)
 
-
+        % this is to refine alveoli area, to avoid alveoli/non-tumor become
+        % very small
         if area_non_tumor_lung <= 81000 %area_non_tumor_lung/area_non_tumor <= 0.2
             BW2 = BW3;
         end
