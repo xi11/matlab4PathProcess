@@ -11,6 +11,10 @@ close all
 %tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
 %dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000';
 
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/tbed1536_ss1/maskLuadLusc';
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/tbed1536_ss1/maskLuadLusc_tmeMacro_tumor5per_remove10000_smooth30';
+
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
@@ -23,7 +27,7 @@ for i =1:length(files)
     if ~isfile(fullfile(dst_path, [file_name, '_tme_tbed.png']))
         mask_raw = imread(fullfile(src_path, [file_name,  '_tbed.png']));
         %if isfile(fullfile(src_path, file_name, 'Ss1.jpg'))
-        mask_tme = imread(fullfile(tme_path, [file_name, '.tif_Ss1.png']));
+        mask_tme = imread(fullfile(tme_path, [file_name, '.svs_Ss1.png']));
         [m, n, ~] = size(mask_tme);
         [m1, n1, ~] = size(mask_raw);
         mask_raw(m1:m, n1:n,:) = 0;
