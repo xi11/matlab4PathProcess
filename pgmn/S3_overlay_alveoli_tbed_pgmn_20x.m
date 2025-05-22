@@ -3,15 +3,15 @@ clc;
 close all
 
 %to overlay tissue, tumor-bed
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
-tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000_smooth30';
-pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/pgmn_segformer_stainedgeV3/mask_ss1_x1';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/fullresoverlay_pgmn_alveoli_tbedraw_remove160000';  %default ss1x8overlay_alveoli_tbed_remove90000
+%tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
+%tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000_smooth30';
+%pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/pgmn_segformer_stainedgeV3/mask_ss1_x1';
+%dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/fullresoverlay_pgmn_alveoli_tbedraw_remove160000';  %default ss1x8overlay_alveoli_tbed_remove90000
  
-%tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/mask_2.5x_tme';
-%tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/maskLuadLusc_tmeMacro_tumor5per_remove10000';
-%pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/mask_2.5x_pgmn';
-%dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/x2.5resoverlay_pgmn_alveoli_tbedraw_remove160000';  %default ss1x8overlay_alveoli_tbed_remove90000
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/mask_10x_tme';
+tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/maskLuadLusc_tmeMacro_tumor5per_remove10000';
+pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/mask_10x_pgmn';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/x10resoverlay_pgmn_alveoli_tbedraw_remove160000';  %default ss1x8overlay_alveoli_tbed_remove90000
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
@@ -23,8 +23,8 @@ for i =1:length(files)
     file_name = files(i).name(1: end-13); %-13 / -9
     disp(file_name)
         mask_tbed = imread(fullfile(tbed_path, [file_name, '_tme_tbed.png'])); %_tme_tbed.png / _tbed.png
-        mask_tme = imread(fullfile(tme_path, [file_name, '.tif_Ss1.png']));
-        mask_pgmn = imread(fullfile(pgmn_path, [file_name, '.tif_Ss1.png']));
+        mask_tme = imread(fullfile(tme_path, [file_name, '_Ss1.png']));
+        mask_pgmn = imread(fullfile(pgmn_path, [file_name, '_Ss1.png']));
         [m, n, ~] = size(mask_pgmn);
         mask_tbed = imresize(mask_tbed, [m, n], 'nearest');
 
