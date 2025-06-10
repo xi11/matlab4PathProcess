@@ -6,9 +6,9 @@ close all
 %segmentation, mainly reduce the influence of artefacts from backgound,
 %compress lung, which can be removed by overlaying tme-seg masks, basically
 %if an individual component doesn't have tumor detected, then remove.
-src_path = '/Volumes/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/tbed1536_ss1/maskLuadLusc_2use';
-tme_path = '/Volumes/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512';
-dst_path = '/Volumes/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/tbed1536_ss1/maskLuadLusc_tmeArtemis_tumor15dilate';
+src_path = '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/tbed1536_ss1/maskLuadLusc_2use';
+tme_path = '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512';
+dst_path = '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/tbed1536_ss1/maskLuadLusc_tmeArtemis_tumor15dilate';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
@@ -37,9 +37,9 @@ for i =1:length(files)
         se2 = strel('disk',15);  %to set
         mask_tissue  = imdilate(mask_tissue , se2);
         mask_tissue  = imfill(mask_tissue , 'holes');
-        mask_bed = uint8(mask_tissue) .* mask_bed;
+        %mask_bed = uint8(mask_tissue) .* mask_bed;
        
-        mask_final = mask_bed .* mask_raw;
+        mask_final = uint8(mask_tissue) .* mask_raw;
         imwrite(mask_final, fullfile(dst_path, [file_name, '_tme_tbed.png']))
     %end
 end
