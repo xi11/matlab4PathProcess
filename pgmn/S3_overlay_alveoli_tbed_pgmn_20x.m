@@ -7,7 +7,7 @@ close all
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
 tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000_smooth30';
 pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/pgmn_segformer_stainedgeV3/mask_ss1_x1';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/fullresoverlay_alveoli_tbedraw_remove160000';  %default ss1x8overlay_alveoli_tbed_remove90000
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/fullresoverlay_pgmnClass_alveoli_tbedraw_remove160000';  %default ss1x8overlay_alveoli_tbed_remove90000
  
 %tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/mask_10x_tme';
 %tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/maskLuadLusc_tmeMacro_tumor5per_remove10000';
@@ -61,11 +61,31 @@ for i =1:length(files)
         mask_tissue3(BW3) = tbed_corlor(3); %mask_tme3(BW3); 
         mask_final = cat(3,mask_tissue1, mask_tissue2, mask_tissue3);
         
-        %%for better visualization with pgmn
+        %%for better visualization with pgmn as all white
         %mask_pgmn_re = mask_pgmn_re(:,:,1);
         %mask_final(repmat(logical(mask_pgmn_re), [1, 1, 3])) = 255;
-        %mask_final = imresize(mask_final,2,'nearest');
+        %%mask_final = imresize(mask_final,2,'nearest');
 
+
+        %%for better visualization with pgmn as in tbed[224, 130, 20] and non-tbed[241,182,218]
+        mask_pgmn_re = mask_pgmn_re(:,:,1);
+        color1 = [224, 130, 20];   % for pixels in both BW3 and mask_pgmn_re
+        color2 = [241,182,218];  % for pixels in mask_pgmn_re but not in BW3
+        
+        % Mask where both BW3 and mask_pgmn_re are true
+        mask_both = BW3 & mask_pgmn_re;
+        
+        % Mask where only mask_pgmn_re is true but not BW3
+        mask_only_pgmn = mask_pgmn_re & ~BW3;
+        
+        % Assign colors to corresponding channels
+        for c = 1:3
+            channel = mask_final(:,:,c);
+            channel(mask_both) = color1(c);
+            channel(mask_only_pgmn) = color2(c);
+            mask_final(:,:,c) = channel;
+        end
+       
         imwrite(mask_final, fullfile(dst_path, [file_name, '_alveoli_tbed.png']))
    
 end
