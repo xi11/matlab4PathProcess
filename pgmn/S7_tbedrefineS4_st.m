@@ -17,7 +17,7 @@ close all
 
 src_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc';
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000_smooth30';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
