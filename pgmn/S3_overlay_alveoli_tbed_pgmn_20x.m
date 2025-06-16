@@ -6,8 +6,8 @@ close all
 %to overlay tissue, tumor-bed
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
 tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000_smooth30';
-pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/pgmn_segformer_stainedgeV3/mask_ss1_x1';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/fullresoverlay_pgmnClass_alveoli_tbedraw_remove160000';  %default ss1x8overlay_alveoli_tbed_remove90000
+pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/pgmn_segformer_stainedgeV3/mask_ss1_x1_filter0fill_dilate23';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/fullresoverlay_pgmnClass_dilate23_alveoli_tbedraw_remove160000';  %default ss1x8overlay_alveoli_tbed_remove90000
  
 %tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/mask_10x_tme';
 %tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/maskLuadLusc_tmeMacro_tumor5per_remove10000';
@@ -25,7 +25,7 @@ for i =1:length(files)
     disp(file_name)
         mask_tbed = imread(fullfile(tbed_path, [file_name, '_tme_tbed.png'])); %_tme_tbed.png / _tbed.png
         mask_tme = imread(fullfile(tme_path, [file_name, '.tif_Ss1.png']));
-        mask_pgmn = imread(fullfile(pgmn_path, [file_name, '.tif_Ss1.png']));
+        mask_pgmn = imread(fullfile(pgmn_path, [file_name, '_dilate.png'])); %'.tif_Ss1.png'
         [m, n, ~] = size(mask_pgmn);
         mask_tbed = imresize(mask_tbed, [m, n], 'nearest');
 
@@ -67,10 +67,10 @@ for i =1:length(files)
         %%mask_final = imresize(mask_final,2,'nearest');
 
 
-        %%for better visualization with pgmn as in tbed[224, 130, 20] and non-tbed[241,182,218]
+        %%for better visualization with pgmn as in tbed[224, 130, 20] and non-tbed[222,119,174]
         mask_pgmn_re = mask_pgmn_re(:,:,1);
         color1 = [224, 130, 20];   % for pixels in both BW3 and mask_pgmn_re
-        color2 = [241,182,218];  % for pixels in mask_pgmn_re but not in BW3
+        color2 = [222,119,174];  % for pixels in mask_pgmn_re but not in BW3
         
         % Mask where both BW3 and mask_pgmn_re are true
         mask_both = BW3 & mask_pgmn_re;
