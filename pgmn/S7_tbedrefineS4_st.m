@@ -3,7 +3,9 @@ clear;
 clc;
 close all
 
-%%%%for ST data, Apr 20
+%%%%for ST data, Apr 20, should be the same processing wiht H&E since the
+%%%%starting point is different,ie.tumor_per>0.05 is incorparated at
+%%%%different steps
 % Oct 23, to refine the overcall of tumor bed with non-alveoli tissue,
 % basically take out non-alveoli, then fill in the holes, then multiply
 % with raw tbed mask, then go to the tumor% checking
@@ -13,9 +15,9 @@ close all
 %compress lung, which can be removed by overlaying tme-seg masks, basically
 %if an individual component doesn't have tumor detected, then remove.
 
-src_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc';
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000';
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc';
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
