@@ -12,23 +12,23 @@ close all
 %compress lung, which can be removed by overlaying tme-seg masks, basically
 %if an individual component doesn't have tumor detected, then remove.
 
-src_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc';
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/visium_TMA5primary2014/HE40x_tif/tbed1536_ss1/maskLuadLusc_tmeMacro_nonAlveoli_tumor5per_remove10000';
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/tbed1536_ss1/maskLuadLusc';
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/tme/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/tbed1536_ss1/maskLuadLusc_tmeMacro_nonAlveoli_tumor5per_remove10000_smooth30';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
 
 
-files = dir(fullfile(src_path, '*104*.png'));
+files = dir(fullfile(src_path, '*.png'));
 for i =1:length(files)
     file_name = files(i).name(1:end-9);
     disp(file_name)
     %if ~isfile(fullfile(dst_path, [file_name, '_tme_tbed.png']))
         mask_raw = imread(fullfile(src_path, [file_name,  '_tbed.png']));
         %if isfile(fullfile(src_path, file_name, 'Ss1.jpg'))
-        mask_tme = imread(fullfile(tme_path, [file_name, '.tif_Ss1.png']));
+        mask_tme = imread(fullfile(tme_path, [file_name, '.svs_Ss1.png']));
         [m, n, ~] = size(mask_tme);
         [m1, n1, ~] = size(mask_raw);
         mask_raw(m1:m, n1:n,:) = 0;
@@ -77,7 +77,7 @@ for i =1:length(files)
             tumorPer = tumorArea / componentArea;
             % If tumor area is less than 5%, remove the component
             if tumorPer < 0.05 
-                mask_bed(componentPixels) = 0;  % Set the pixels to black (or any background color)
+                mask_bed(componentPixels) = 0;  % Set the pixels to black (or any background color); same with S7_tbedrefineS4_st.m for ST samples
             end
 
             if componentArea < 10000

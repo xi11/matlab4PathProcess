@@ -2,11 +2,11 @@ clear;
 clc;
 close all
 
-pgmn_neighbour = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate5_4tme';
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
-tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000LN_nec';
-dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_pgmn_tbed';
-dst_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_pgmn_lung';
+pgmn_neighbour = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate6_4tme';
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/tme/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000_necLN';
+dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate6pgmn_tbed';
+dst_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate6pgmn_lung';
 
 if ~exist(dst_path1, 'dir')
     mkdir(dst_path1)

@@ -4,7 +4,7 @@ close all
 
 
 pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/pgmn_segformer_stainedgeV3/mask_ss1_x1'; % 20x, 0.44mpp
-dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/pgmn_segformer_stainedgeV3/mask_ss1_x1_filter0fill_dilate45'; % 23pix: 10um; 45pix: 20um
+dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/pgmn_segformer_stainedgeV3/mask_ss1_x1_filter0fill_dilate136'; % 23pix: 10um; 45pix: 20um; 91pix: 40um; 114pix: 50um; 136pix: 60um; 182pix: 80um
 if ~exist(dst_path1, 'dir')
     mkdir(dst_path1)
 end
@@ -29,7 +29,7 @@ for i =1:length(files)
         pgmn_filtered = false(size(pgmn_neigh3));
         pgmn_filtered(cat(1, CC.PixelIdxList{large_components})) = true;
 
-        radius = 45; %23pix: 10um; 45pix: 20um
+        radius = 136; %23pix: 10um; 45pix: 20um; 91pix: 40um; 114pix: 50um; 136pix: 60um; 182pix: 80um
         se = strel('disk', radius);
         pgmn_neigh = imdilate(pgmn_filtered, se);
         mask_pgmn_neigh = 255*uint8(pgmn_neigh);

@@ -3,9 +3,9 @@ clc;
 close all
 
 
-src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_pgmn_tbed';
-src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_pgmn_lung';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3';
+src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate6pgmn_tbed';
+src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate6pgmn_lung';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/dilate6';
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
@@ -82,8 +82,8 @@ T = cell2table(result_table, ...
     'VariableNames', [{'file_name', 'region_type'}, tissue_labels]);
 T1 = cell2table(result_table_pix, ...
     'VariableNames', [{'file_name', 'region_type'}, tissue_labels]);
-writetable(T, fullfile(dst_path, 'pgmn_TMEper.xlsx'));
-writetable(T1, fullfile(dst_path, 'pgmn_TMEpix.xlsx'));
+writetable(T, fullfile(dst_path, 'pgmnNeighbour_TMEper.xlsx'));
+writetable(T1, fullfile(dst_path, 'pgmnNeighbour_TMEpix.xlsx'));
 
 
 
