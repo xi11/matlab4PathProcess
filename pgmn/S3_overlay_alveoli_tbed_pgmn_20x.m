@@ -6,8 +6,8 @@ close all
 %to overlay tissue, tumor-bed
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
 tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000_smooth30';
-pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/pgmn_segformer_stainedgeV3/mask_ss1_x1_filter0fill_dilate91';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/fullresoverlay_pgmnClass_dilate91_alveoli_tbedraw_remove160000';  %default ss1x8overlay_alveoli_tbed_remove90000
+pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/pgmn_segformer_stainedgeV3/mask_ss1_x1_filter0fill_dilate227';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/10x_xenium/fullresoverlay_pgmnClass_dilate227_alveoli_tbedraw_remove160000';  %default ss1x8overlay_alveoli_tbed_remove90000
  
 %tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/mask_10x_tme';
 %tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/maskLuadLusc_tmeMacro_tumor5per_remove10000';

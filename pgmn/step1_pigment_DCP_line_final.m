@@ -5,7 +5,7 @@ close all
 %remove line in the tile processing, should be the final version
 
 src_path = '/Volumes/yuan_lab/TIER2/anthracosis/pgmnModel/stain_edge/HE_tile';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/pgmnModel/stain_edge/mask_DCP30minC50_dilate1_remove64_pen100000_line98_ratio98';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/pgmnModel/stain_edge/mask_DCP30minC70_dilate1_remove64_pen100000_line98_ratio98';
 % src_path = 'R:\tracerx\tracerx421\HE_diagnostic_LUSC\cws';
 % dst_path = 'D:\tx421_fine_tune\LUSC_pigment_DCP30minC50_dilate1_remove64_pen100000_line98_ratio98';
 
