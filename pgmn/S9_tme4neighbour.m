@@ -2,7 +2,7 @@ clear;
 clc;
 close all
 
-pgmn_neighbour = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate6_4tme';
+pgmn_neighbour = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate6_neighbour_4tme'; % dilateX_4tme: in situ; neighbour_4tme: neighbour
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/tme/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
 tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000_necLN';
 dst_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate6pgmn_tbed';
@@ -18,9 +18,9 @@ end
 
 tbed_color = [135, 133, 186];
 tissue_color = [0, 128, 0];  %alveoli
-files = dir(fullfile(pgmn_neighbour, '*dilate1.png'));
+files = dir(fullfile(pgmn_neighbour, '*.png')); %dilate1: in situ
 for i =1:length(files)
-    file_name = files(i).name(1:end-17); %_4tme_dilate1.png; -18: _neighbour4tme.png
+    file_name = files(i).name(1:end-18); %_4tme_dilate1.png; -18: _neighbour4tme.png
     disp(file_name)
     
     pgmn_raw = imread(fullfile(pgmn_neighbour, files(i).name)); % binary mask
