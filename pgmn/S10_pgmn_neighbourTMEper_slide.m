@@ -2,10 +2,12 @@ clear;
 clc;
 close all
 
+dilate_values = [6, 11, 14, 17, 23, 28];
 
-src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate6pgmn_tbed';
-src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate6pgmn_lung';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/pgmn_segformer_stainedgeV3/dilate6';
+for j = dilate_values
+    src_path1 = sprintf('/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate%dpgmn_tbed', j);
+    src_path2 = sprintf('/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate%dpgmn_lung', j);
+    dst_path = sprintf('/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/0neighbourTME/dilate%d', j);
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
@@ -85,7 +87,7 @@ T1 = cell2table(result_table_pix, ...
 writetable(T, fullfile(dst_path, 'pgmnNeighbour_TMEper.xlsx'));
 writetable(T1, fullfile(dst_path, 'pgmnNeighbour_TMEpix.xlsx'));
 
-
+end
 
 
 
