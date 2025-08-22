@@ -3,7 +3,7 @@ clc
 close all
 
 
-src_gp_mask = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+src_gp_mask = '/Volumes/yuan_lab/TIER2/anthracosis/LungAdenocarcinomaEvolutionHE_PingMP/China/tme_RegionROIs';
 
 files = dir(fullfile(src_gp_mask, '*.png'));
 tableTmp = table("",0,0,0,0,0,0,0,0,0,0,'VariableNames',{'ID', 'tumor_pix', 'stroma_pix', 'inflam_pix', 'necrosis_pix',...
@@ -49,9 +49,6 @@ for i = 1:k
     tableTmp.macrophage_pix(i) = gp_pix(i, 8);
     tableTmp.alveoli_pix(i) = gp_pix(i, 9);
     tableTmp.muscle_pix(i) = gp_pix(i, 10);
- 
-
-
-%           
+         
 end
-writetable(tableTmp, '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/TMA5_tme_pix.xlsx')
+writetable(tableTmp, '/Volumes/yuan_lab/TIER2/anthracosis/LungAdenocarcinomaEvolutionHE_PingMP/China/tme_pix.xlsx')
