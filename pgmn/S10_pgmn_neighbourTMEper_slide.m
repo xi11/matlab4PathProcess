@@ -5,9 +5,9 @@ close all
 dilate_values = [6, 11, 14, 17, 23, 28];
 
 for j = dilate_values
-    src_path1 = sprintf('/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate%dpgmn_tbed', j);
-    src_path2 = sprintf('/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate%dpgmn_lung', j);
-    dst_path = sprintf('/Volumes/yuan_lab/TIER2/anthracosis/cptac_luad/pgmn_segformer_stainedgeV3/0neighbourTME/dilate%d', j);
+    src_path1 = sprintf('/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate%dpgmn_tbed', j);
+    src_path2 = sprintf('/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/mask_ss1_x8_1filter0fill_dilate%dpgmn_lung', j);
+    dst_path = sprintf('/Volumes/yuan_lab/TIER2/anthracosis/TMA5/pgmn_segformer_stainedgeV3/0neighbourTME/dilate%d', j);
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
 end
