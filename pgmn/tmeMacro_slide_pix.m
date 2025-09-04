@@ -12,7 +12,7 @@ k = length(files);
 gp_pix = zeros(k, 10);
 for i = 1:k
     file_name = files(i).name;
-    wsi_ID = extractBefore(file_name, '.svs_Ss1.png');
+    wsi_ID = extractBefore(file_name, '.png'); %.svs_Ss1.png
    
     img = double(imread(fullfile(src_gp_mask, file_name)));
     temp = [];
