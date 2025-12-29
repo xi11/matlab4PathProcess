@@ -3,8 +3,8 @@ clear;
 clc;
 close all
 %final
-src_path = '/Volumes/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512';
-dst_path = '/Volumes/yuan_lab/TIER2/artemis_lei/IMPRESS_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_post_tumor15_900';
+src_path = '/Volumes/yuan_lab/TIER2/artemis_lei/validation/mit-b3-finetunedBRCA-Artemis1733-s512-20x512/mask_ss1512';
+dst_path = '/Volumes/yuan_lab/TIER2/artemis_lei/validation/mit-b3-finetunedBRCA-Artemis1733-s512-20x512/mask_ss1512_post_tumor15_900';
 
 
 if ~exist(dst_path, 'dir')

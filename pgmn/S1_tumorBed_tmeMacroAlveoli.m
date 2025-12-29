@@ -12,9 +12,9 @@ close all
 %compress lung, which can be removed by overlaying tme-seg masks, basically
 %if an individual component doesn't have tumor detected, then remove.
 
-src_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/tbed1536_ss1_deeplabv3p/maskLuadLusc';
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/tbed1536_ss1_deeplabv3p/maskLuadLusc_tmeMacro_nonAlveoli_tumor5per_remove10000_smooth30';
+src_path = '/Volumes/yuan_lab/TIER2/anthracosis/nlst1225/tbed1536_ss1/maskLuadLusc';
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/nlst1225/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/nlst1225/tbed1536_ss1/maskLuadLusc_tmeMacro_nonAlveoli_tumor5per_remove10000_smooth30';
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
