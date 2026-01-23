@@ -3,6 +3,7 @@ clc;
 close all
 
 % to remove necrosis, fat and muscle identified by tme segformer
+% non-use
 src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/tme/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
 src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_tissue_tbed_remove90000';
 dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/tcga-luad/ss1x8overlay_tissue_tbed_remove90000_nec';

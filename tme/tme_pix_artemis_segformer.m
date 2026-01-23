@@ -3,7 +3,7 @@ clc
 close all
 
 
-src_gp_mask = '/Volumes/yuan_lab/TIER2/artemis_lei/validation/mit-b3-finetunedBRCA-Artemis1733-s512-20x512/mask_ss1512_post_tumor15_900';
+src_gp_mask = '/Volumes/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_tbed';
 
 files = dir(fullfile(src_gp_mask, '*.png'));
 
@@ -52,4 +52,4 @@ for i = 1:k
 
 %           
 end
-writetable(tableTmp, '/Volumes/yuan_lab/TIER2/artemis_lei/validation/mit-b3-finetunedBRCA-Artemis1733-s512-20x512/validation_post_tme_pix.xlsx')
+writetable(tableTmp, '/Volumes/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/TCGA-TNBC_tme_tbed_pix.xlsx')
