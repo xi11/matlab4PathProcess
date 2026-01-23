@@ -3,9 +3,9 @@ clc;
 close all
 
 % to remove necrosis, fat and muscle identified by tme segformer
-src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
-src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000LN';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/TMA5/ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000LN_nec';
+src_path1 = '/Volumes/yuan_lab/TIER2/anthracosis/nlst1225/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1512';
+src_path2 = '/Volumes/yuan_lab/TIER2/anthracosis/nlst1225/ss1x8overlay_alveoli_tbedRefine_remove90000'; %ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000LN; %for tcga, cptac and in-house
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/nlst1225/ss1x8overlay_alveoli_tbedRefine_remove90000_nec'; %ss1x8overlay_alveoli_nonTper_tbedAlveoli81000tme_close5remove90000LN_nec'; %for tcga, cptac and in-house
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
@@ -17,7 +17,7 @@ for i =1:length(files)
     file_name = files(i).name(1: end-12);
     disp(file_name)
     mask_tme = imread(fullfile(src_path1, files(i).name));
-    mask_tbed_path = fullfile(src_path2, [file_name, '_tme_tbed.png']); %.svs_alveoli_tbed.png
+    mask_tbed_path = fullfile(src_path2, [file_name, '.svs_alveoli_tbed.png']); %.svs_alveoli_tbed.png; %for tcga, cptac, and in-house: _tme_tbed.png'
     if exist(mask_tbed_path, 'file') == 2
     mask_tbed = imread(mask_tbed_path);
 
