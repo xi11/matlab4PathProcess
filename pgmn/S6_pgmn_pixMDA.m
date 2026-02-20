@@ -3,7 +3,7 @@ clc
 close all
 
 
-src_gp_mask = '/Volumes/yuan_lab/TIER2/anthracosis/LungAdenocarcinomaEvolutionHE_PingMP/USA/pgmn_RegionROIs';
+src_gp_mask = '/Volumes/yuan_lab/TIER2/anthracosis/nlst1225/pgmn_segformer_stainedgeV3/mask_ss1_x8';
 files = dir(fullfile(src_gp_mask, '*.png'));
 
 tableTmp = table("",0,'VariableNames',{'ID','pigment8'});
@@ -27,4 +27,4 @@ for i = 1:k
     tableTmp.pigment8(i) = gp_pix(i, 1);
         
 end
-writetable(tableTmp, '/Volumes/yuan_lab/TIER2/anthracosis/LungAdenocarcinomaEvolutionHE_PingMP/USA/rawRes_pigment.xlsx')
+writetable(tableTmp, '/Volumes/yuan_lab/TIER2/anthracosis/nlst1225/pgmn_segformer_stainedgeV3/raw_pigment.xlsx')
