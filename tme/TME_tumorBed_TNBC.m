@@ -3,8 +3,8 @@ clear;
 clc;
 close all
 %final
-src_path = '/Volumes/xpan7-1/project/tcga_tnbc/mit-b3-finetuned-tmeTCGAbrca-e60-lr00001-s512-20x768/mask_ss1512';
-dst_path = '/Volumes/xpan7-1/project/tcga_tnbc/mit-b3-finetuned-tmeTCGAbrca-e60-lr00001-s512-20x768/mask_ss1512_post_tumor21_90000';
+src_path = '/Volumes/yuan_lab/TIER2/tms_tnbc_wenyi/tcga/mit-b3-finetuned-tmeTCGA-60-lr00001-s512-20x768/mask_ss1512';
+dst_path = '/Volumes/yuan_lab/TIER2/tms_tnbc_wenyi/tcga/mit-b3-finetuned-tmeTCGA-60-lr00001-s512-20x768/mask_ss1512_post_tumor21_90000';
 
 
 if ~exist(dst_path, 'dir')
