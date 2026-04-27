@@ -4,10 +4,10 @@ close all
 
 % this is for ST overlay
 %to overlay tissue, tumor-bed
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/he/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
-tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/he/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000_smooth30';
-pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/he/pgmn_segformer_stainedgeV3/mask_ss1_x1';
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/he/fullresoverlay_pgmn_alveoli_tbedraw_remove160000'; 
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/IO60/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
+tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/IO60/tbed1536_ss1/maskLuadLusc1178'; % _nonTper_nonAlveoli_remove10000_smooth30';
+pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/IO60/pgmn_segformer_stainedgeV3/mask_ss1_x1';
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/IO60/fullresoverlay_pgmn_alveoli_tbedraw_remove160000'; 
  
 %tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/mask_10x_tme';
 %tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/maskLuadLusc_tmeMacro_tumor5per_remove10000';
@@ -20,9 +20,9 @@ tbed_corlor = [135, 133, 186];
 tissue_color = [0, 128, 0];  %alveoli
 files = dir(fullfile(tbed_path, '*tbed.png'));
 for i =1:length(files)
-    file_name = files(i).name(1: end-13); %-13 / -9
+    file_name = files(i).name(1: end-9); %-13 / -9
     disp(file_name)
-        mask_tbed = imread(fullfile(tbed_path, [file_name, '_tme_tbed.png'])); %_tme_tbed.png / _tbed.png
+        mask_tbed = imread(fullfile(tbed_path, [file_name, '_tbed.png'])); %_tme_tbed.png / _tbed.png
         mask_tme = imread(fullfile(tme_path, [file_name, '.tif_Ss1.png']));
         mask_pgmn = imread(fullfile(pgmn_path, [file_name, '.tif_Ss1.png'])); %, '_dilate.png'
         [m, n, ~] = size(mask_pgmn);
