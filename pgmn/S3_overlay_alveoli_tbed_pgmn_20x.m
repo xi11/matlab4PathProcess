@@ -7,7 +7,7 @@ close all
 tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/MALDI-MSI/he_register/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
 tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/MALDI-MSI/he_register/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000_smooth30'; % ';
 pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/MALDI-MSI/he_register/pgmn_segformer_stainedgeV3/mask_ss1_x1'; %_filter0fill_dilate45
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/MALDI-MSI/he_register/fullresoverlay_pgmnClass_dilate0_alveoli_tbedraw_remove160000'; 
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/MALDI-MSI/he_register/fullresoverlay_pgmn_alveoli_tbedraw_remove160000'; 
  
 %tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/mask_10x_tme';
 %tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/maskLuadLusc_tmeMacro_tumor5per_remove10000';
@@ -68,8 +68,10 @@ for i =1:length(files)
 
         %%for better visualization with pgmn as in tbed[224, 130, 20] and non-tbed[222,119,174]
         mask_pgmn_re = mask_pgmn_re(:,:,1);
-        color1 = [224, 130, 20];   % for pixels in both BW3 and mask_pgmn_re
-        color2 = [222,119,174];  % for pixels in mask_pgmn_re but not in BW3
+        %color1 = [224, 130, 20];   % for pixels in both BW3 and mask_pgmn_re
+        %color2 = [222,119,174];  % for pixels in mask_pgmn_re but not in BW3
+        color1 = [255, 255, 255];   % for pixels pgmn
+        color2 = [255, 255, 255];  % 
         
         % Mask where both BW3 and mask_pgmn_re are true
         mask_both = BW3 & mask_pgmn_re;
