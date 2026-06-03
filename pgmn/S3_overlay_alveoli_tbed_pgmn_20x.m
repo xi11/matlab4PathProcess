@@ -4,10 +4,10 @@ close all
 
 % this is for ST overlay
 %to overlay tissue, tumor-bed
-tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/he/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
-tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/he/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000_smooth30'; % ';
-pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/he/pgmn_segformer_stainedgeV3/mask_ss1_x1'; %_filter0fill_dilate45
-dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/xenium_PCF_HE_TMA5primary/he/fullresoverlay_pgmnClass_dilate0_alveoli_tbedraw_remove160000'; 
+tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/MALDI-MSI/he_register/mit-b3-finetuned-TCGAbcssWsss10xLuadMacroMuscle-40x896-20x512-10x256re/mask_ss1x512';
+tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/MALDI-MSI/he_register/tbed1536_ss1/maskLuadLusc_nonTper_nonAlveoli_remove10000_smooth30'; % ';
+pgmn_path = '/Volumes/yuan_lab/TIER2/anthracosis/MALDI-MSI/he_register/pgmn_segformer_stainedgeV3/mask_ss1_x1'; %_filter0fill_dilate45
+dst_path = '/Volumes/yuan_lab/TIER2/anthracosis/MALDI-MSI/he_register/fullresoverlay_pgmnClass_dilate0_alveoli_tbedraw_remove160000'; 
  
 %tme_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/mask_10x_tme';
 %tbed_path = '/Volumes/yuan_lab/TIER2/anthracosis/never_smoker/fig1_demo/maskLuadLusc_tmeMacro_tumor5per_remove10000';
