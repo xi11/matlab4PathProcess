@@ -13,7 +13,7 @@ k = length(files);
 gp_pix = zeros(k, 7);
 for i = 1:k
     file_name = files(i).name;
-    wsi_ID = extractBefore(file_name, '_tme_tbed.png'); %'_Ss1.png' 
+    wsi_ID = extractBefore(file_name, '_tme_tbed.png'); %'_Ss1.png' ; '_tme_tbed.png; '_tumor_dilate15.png'
    
     img = double(imread(fullfile(src_gp_mask, file_name)));
     temp = [];
