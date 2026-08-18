@@ -4,10 +4,10 @@ clc;
 close all
 %tumor-region 11-13-15pix dilation
 
-tme_path = '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_orng';
-dilation_radius = 11;  % hyperparameter in pixels
+tme_path = '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/replacement/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512';
+dilation_radius = 15;  % hyperparameter in pixels
 
-dst_path = sprintf('%s_tumor%ddilate', tme_path(1:end-5), dilation_radius);
+dst_path = sprintf('%s_tumor%ddilate', tme_path(1:end), dilation_radius);
 
 if ~exist(dst_path, 'dir')
     mkdir(dst_path)
