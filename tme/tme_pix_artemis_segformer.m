@@ -3,7 +3,7 @@ clc
 close all
 
 
-src_gp_mask = '/Volumes/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_tbed';
+src_gp_mask = '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/mask_ss1512_tbed_manual';
 
 files = dir(fullfile(src_gp_mask, '*.png'));
 
@@ -13,7 +13,7 @@ k = length(files);
 gp_pix = zeros(k, 7);
 for i = 1:k
     file_name = files(i).name;
-    wsi_ID = extractBefore(file_name, '_Ss1.png');
+    wsi_ID = extractBefore(file_name, '_tme_tbed.png'); %'_Ss1.png' 
    
     img = double(imread(fullfile(src_gp_mask, file_name)));
     temp = [];
@@ -21,7 +21,7 @@ for i = 1:k
     mask_digit = zeros(m, n);
     mask_digit((img(:,:,1)==255 & img(:,:,2)==0 & img(:,:,3)==255)) = 1; %necrosis
     mask_digit((img(:,:,1)==128 & img(:,:,2)==0 & img(:,:,3)==0)) = 2; %tumor
-    mask_digit((img(:,:,1)==255 & img(:,:,2)==204 & img(:,:,3)==0)) = 3; %stroma
+    mask_digit((img(:,:,1)==255 & img(:,:,2)==255 & img(:,:,3)==0)) = 3; %stroma, 255vs. 204
     mask_digit((img(:,:,1)==128 & img(:,:,2)==128 & img(:,:,3)==0)) = 4; %fat
     mask_digit((img(:,:,1)==0 & img(:,:,2)==255 & img(:,:,3)==255)) = 5; %parenchyma
     %%added for model trained with tcga only
@@ -52,4 +52,4 @@ for i = 1:k
 
 %           
 end
-writetable(tableTmp, '/Volumes/yuan_lab/TIER2/artemis_lei/TCGA_TNBC/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/TCGA-TNBC_tme_tbed_pix.xlsx')
+writetable(tableTmp, '/Volumes/yuan_lab/TIER2/artemis_lei/discovery/mit-b3-finetunedBRCA-Artemis-e60-lr00001-s512-20x512/manual_tme_tbed_pix.xlsx')
